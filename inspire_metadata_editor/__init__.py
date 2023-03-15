@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 ##############################################################################
 #
 #  Title:   __init__.py
@@ -23,13 +25,14 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-from __future__ import absolute_import
-from builtins import str
-import json
+
 import os
+import json
+
+from inspire_metadata_editor.plugin import InspireMetadataEditorPlugin
+
 def classFactory(iface):
-    from .snimarMetadataEditorPluginEntryPoint import EditorMetadadosPluginEntryPoint
-    return EditorMetadadosPluginEntryPoint(iface)
+    return InspireMetadataEditorPlugin(iface)
 
 
 def get_version():

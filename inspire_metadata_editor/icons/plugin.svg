@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3106"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="MetaEditor12.svg"
+   inkscape:export-filename="/home/snimar5/Documents/IPMA/Editor de Metadados/MetaEditor13.png"
+   inkscape:export-xdpi="33.75"
+   inkscape:export-ydpi="33.75">
+  <defs
+     id="defs3108" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="10.24"
+     inkscape:cx="12.960418"
+     inkscape:cy="39.735886"
+     inkscape:current-layer="g3926"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3111">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer"
+     style="display:none">
+    <path
+       sodipodi:type="arc"
+       style="fill:#333333;fill-opacity:1;display:inline"
+       id="path2993"
+       sodipodi:cx="14.556428"
+       sodipodi:cy="14.719823"
+       sodipodi:rx="14.377822"
+       sodipodi:ry="14.60108"
+       d="m 28.93425,14.719823 a 14.377822,14.60108 0 1 1 -5e-6,-0.01218"
+       sodipodi:start="0"
+       sodipodi:end="6.2823512"
+       sodipodi:open="true"
+       transform="matrix(2.222257,0,0,2.1929431,-0.34812392,-0.27973403)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Layer#3"
+     style="display:none">
+    <rect
+       style="fill:#333333;stroke-width:3.5;stroke-miterlimit:4;stroke-dasharray:none;display:inline"
+       id="rect3839"
+       width="63.943447"
+       height="63.943447"
+       x="0.028276443"
+       y="0.028276443"
+       rx="10" />
+  </g>
+  <g
+     style="display:inline"
+     inkscape:label="Layer#4"
+     id="g3926"
+     inkscape:groupmode="layer">
+    <rect
+       rx="9.4112978"
+       y="1.9484522"
+       x="1.9080019"
+       height="60.240479"
+       width="60.179085"
+       id="rect3928"
+       style="fill:none;fill-opacity:1;stroke:#030053;stroke-width:3.68400000000000016;stroke-miterlimit:4;stroke-dasharray:none;display:inline;stroke-opacity:0.96803653000000001" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer#1"
+     style="display:inline">
+    <path
+       inkscape:connector-curvature="0"
+       id="path4686"
+       d="m 12.569678,9.7089858 32.711646,0"
+       style="fill:#333333;fill-opacity:1;stroke:#2854aa;stroke-width:3.75700000000000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4690"
+       d="m 18.718679,16.803436 32.711644,0"
+       style="fill:#333333;fill-opacity:1;stroke:#2854aa;stroke-width:3.75700000000000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       style="fill:#333333;fill-opacity:1;stroke:#2854aa;stroke-width:3.75700000000000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 12.569679,30.992341 32.711645,0"
+       id="path4692"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#333333;fill-opacity:1;stroke:#2854aa;stroke-width:3.75700000000000012;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 18.718679,23.89789 32.711644,0"
+       id="path4696"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Layer#2"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-size:83.33171844px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="7.448977"
+       y="55.886337"
+       id="text3047"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3049"
+         x="7.448977"
+         y="55.886337"
+         style="font-size:29.16610146px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;fill:#333333;font-family:Ubuntu;-inkscape-font-specification:Ubuntu Medium">xml</tspan></text>
+  </g>
+  <g
+     style="display:inline"
+     inkscape:label="Layer#5"
+     id="g3130"
+     inkscape:groupmode="layer">
+    <text
+       sodipodi:linespacing="125%"
+       id="text3132"
+       y="55.886337"
+       x="9.1409702"
+       style="font-size:28px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Umpush;-inkscape-font-specification:Umpush Bold Oblique"
+       xml:space="preserve"><tspan
+         style="font-size:28px;font-style:oblique;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;font-family:Umpush;-inkscape-font-specification:Umpush Bold Oblique;fill-opacity:1"
+         y="55.886337"
+         x="9.1409702"
+         id="tspan3134"
+         sodipodi:role="line">xml</tspan></text>
+  </g>
+</svg>
