@@ -1,8 +1,7 @@
-.idea
-.meLock
 *.pyc
-*.bak
-/Releases/
-/EditorMetadadosSNIMar/snimarQtInterfaceView/pyuic4GeneratedSourceFiles/
-
-public/
+*.*~
+*~
+*.diff
+*.log*
+*.qm
+__pycache__/
