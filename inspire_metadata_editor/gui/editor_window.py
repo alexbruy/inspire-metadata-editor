@@ -87,11 +87,11 @@ class EditorWindow(BASE, WIDGET):
         self.open_list = filemanager.FileManager(to_save=False, editordir=self.editor_dirname())
         self.last_open_dir = os.path.expanduser('~')
 
-        f = open(os.path.join(PLUGIN_ROOT, 'resourcesFolder', 'stylesheet.qtcss'))
-        self.sytlesheet = f.read()
-        for btn in self.findChildren(QWidget):
-            btn.setStyleSheet(self.sytlesheet)
-            btn.setFocusPolicy(Qt.NoFocus)
+        # ~ f = open(os.path.join(PLUGIN_ROOT, 'resourcesFolder', 'stylesheet.qtcss'))
+        # ~ self.sytlesheet = f.read()
+        # ~ for btn in self.findChildren(QWidget):
+            # ~ btn.setStyleSheet(self.sytlesheet)
+            # ~ btn.setFocusPolicy(Qt.NoFocus)
 
         #self.showMaximized()
         self.setWindowTitle(self.tr("INSPIRE Metadata Editor"))
