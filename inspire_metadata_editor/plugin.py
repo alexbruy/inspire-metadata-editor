@@ -105,18 +105,18 @@ class InspireMetadataEditorPlugin:
                 return
 
         # Create and display the splash screen
-        splash_pix = QPixmap(os.path.join(PLUGIN_ROOT, "icons", "splash.png"))
-        splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
-        splash.setMask(splash_pix.mask())
-        splash.setWindowFlags(splash.windowFlags() | Qt.WindowStaysOnTopHint)
-        splash.show()
+        # ~ splash_pix = QPixmap(os.path.join(PLUGIN_ROOT, "icons", "splash.png"))
+        # ~ splash = QSplashScreen(splash_pix, Qt.WindowStaysOnTopHint)
+        # ~ splash.setMask(splash_pix.mask())
+        # ~ splash.setWindowFlags(splash.windowFlags() | Qt.WindowStaysOnTopHint)
+        # ~ splash.show()
 
-        QApplication.processEvents()
+        # ~ QApplication.processEvents()
 
-        start = time.time()
-        while time.time() < start + 2:
-            QApplication.processEvents()
-        splash.close()
+        # ~ start = time.time()
+        # ~ while time.time() < start + 2:
+            # ~ QApplication.processEvents()
+        # ~ splash.close()
 
         f = open(os.path.join(PLUGIN_ROOT, "userFiles", ".meLock"), "w")
         f.close()
