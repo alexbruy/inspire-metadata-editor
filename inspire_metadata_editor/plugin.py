@@ -1,4 +1,4 @@
-# -*- coding=utf-8 -*-
+# -*- coding: utf-8 -*-
 
 ##############################################################################
 #
@@ -35,8 +35,7 @@ from qgis.PyQt.QtCore import Qt, QCoreApplication
 from qgis.PyQt.QtWidgets import QSplashScreen, QApplication, QAction, QMessageBox
 
 from inspire_metadata_editor.editorMetadadosMarswInforbiomares import EditorMetadadosMarswInforbiomares
-
-PLUGIN_ROOT = os.path.dirname(__file__)
+from inspire_metadata_editor.constants import PLUGIN_ROOT
 
 
 class InspireMetadataEditorPlugin:
