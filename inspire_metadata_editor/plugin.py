@@ -34,7 +34,10 @@ from qgis.PyQt.QtGui import QIcon, QPixmap
 from qgis.PyQt.QtCore import Qt, QCoreApplication
 from qgis.PyQt.QtWidgets import QSplashScreen, QApplication, QAction, QMessageBox
 
+from qgis.core import QgsApplication
+
 from inspire_metadata_editor.editorMetadadosMarswInforbiomares import EditorMetadadosMarswInforbiomares
+from inspire_metadata_editor.gui.about_dialog import AboutDialog
 from inspire_metadata_editor.constants import PLUGIN_ROOT
 
 
@@ -44,17 +47,26 @@ class InspireMetadataEditorPlugin:
         self.iface = iface
 
     def initGui(self):
-        self.action = QAction(self.tr("INSPIRE Metadata Editor"), self.iface.mainWindow())
-        self.action.setIcon(QIcon(os.path.join(PLUGIN_ROOT, "icons", "plugin.svg")))
-        self.action.setObjectName('actionOpenInspireEditor')
-        self.action.triggered.connect(self.run)
+        self.action_run = QAction(self.tr("INSPIRE Metadata Editor"), self.iface.mainWindow())
+        self.action_run.setIcon(QIcon(os.path.join(PLUGIN_ROOT, "icons", "plugin.svg")))
+        self.action_run.setObjectName('actionOpenInspireEditor')
+        self.action_run.triggered.connect(self.run)
 
-        self.iface.addPluginToMenu(self.tr('INSPIRE Metadata Editor'), self.action)
-        self.iface.addToolBarIcon(self.action)
+        self.action_about = QAction(self.tr('About…'), self.iface.mainWindow())
+        self.action_about.setIcon(QgsApplication.getThemeIcon('/mActionHelpContents.svg'))
+        self.action_about.setObjectName('actionAboutInspireEditor')
+        self.action_about.triggered.connect(self.about)
+
+        self.iface.addPluginToMenu(self.tr('INSPIRE Metadata Editor'), self.action_run)
+        self.iface.addPluginToMenu(self.tr('INSPIRE Metadata Editor'), self.action_about)
+
+        self.iface.addToolBarIcon(self.action_run)
 
     def unload(self):
-        self.iface.removePluginMenu(self.tr('INSPIRE Metadata Editor'), self.action)
-        self.iface.removeToolBarIcon(self.action)
+        self.iface.removePluginMenu(self.tr('INSPIRE Metadata Editor'), self.action_run)
+        self.iface.removePluginMenu(self.tr('INSPIRE Metadata Editor'), self.action_about)
+
+        self.iface.removeToolBarIcon(self.action_run)
 
         try:
             os.remove(os.path.join(PLUGIN_ROOT, "userFiles", ".meLock"))
@@ -111,6 +123,10 @@ class InspireMetadataEditorPlugin:
         dialog = EditorMetadadosMarswInforbiomares(self.iface, self)
         dialog.setWindowIcon(QIcon(os.path.join(PLUGIN_ROOT, "icons", "plugin.svg")))
         dialog.show()
+
+    def about(self):
+        dlg = AboutDialog()
+        dlg.exec_()
 
     def tr(self, text):
         return QCoreApplication.translate(self.__class__.__name__, text)
