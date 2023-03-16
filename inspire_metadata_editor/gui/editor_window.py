@@ -93,7 +93,7 @@ class EditorWindow(BASE, WIDGET):
             btn.setStyleSheet(self.sytlesheet)
             btn.setFocusPolicy(Qt.NoFocus)
 
-        self.showMaximized()
+        #self.showMaximized()
         self.setWindowTitle(self.tr("INSPIRE Metadata Editor"))
 
         # Shortcuts
