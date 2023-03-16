@@ -36,7 +36,7 @@ from qgis.PyQt.QtWidgets import QSplashScreen, QApplication, QAction, QMessageBo
 
 from qgis.core import QgsApplication
 
-from inspire_metadata_editor.editorMetadadosMarswInforbiomares import EditorMetadadosMarswInforbiomares
+from inspire_metadata_editor.gui.editor_window import EditorWindow
 from inspire_metadata_editor.gui.about_dialog import AboutDialog
 from inspire_metadata_editor.constants import PLUGIN_ROOT
 
@@ -120,7 +120,7 @@ class InspireMetadataEditorPlugin:
 
         f = open(os.path.join(PLUGIN_ROOT, "userFiles", ".meLock"), "w")
         f.close()
-        dialog = EditorMetadadosMarswInforbiomares(self.iface, self)
+        dialog = EditorWindow()
         dialog.setWindowIcon(QIcon(os.path.join(PLUGIN_ROOT, "icons", "plugin.svg")))
         dialog.show()
 

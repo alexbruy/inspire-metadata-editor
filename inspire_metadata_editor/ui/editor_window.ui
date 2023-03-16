@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainwindow</class>
+ <widget class="QMainWindow" name="mainwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="locale">
+   <locale language="Portuguese" country="Portugal"/>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonTextBesideIcon</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>3</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>3</number>
+    </property>
+    <property name="bottomMargin">
+     <number>3</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="filelist">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+       <attribute name="title">
+        <string>Lista de Ficheiros</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="3">
+         <widget class="QPushButton" name="btn_conform_all">
+          <property name="maximumSize">
+           <size>
+            <width>110</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Verificar
+ Conformidade
+ (Todos)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QPushButton" name="btn_delete_all">
+          <property name="maximumSize">
+           <size>
+            <width>110</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Apagar
+ Lista de
+ Ficheiros</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="5">
+         <widget class="QTableView" name="filetable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::SolidLine</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>false</bool>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>10</number>
+          </attribute>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QWidget" name="thesaurus_version_wrapper" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>280</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>6</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>4</number>
+           </property>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="thesaurus_title_label">
+             <property name="font">
+              <font>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Thesaurus SNIMar</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="thesaurus_update">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="toolTip">
+              <string>Atualizar a lista de palavras do Thesaurus SNIMar</string>
+             </property>
+             <property name="text">
+              <string>Actualizar</string>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="1" alignment="Qt::AlignBottom">
+         <widget class="QWidget" name="widget" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout"/>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::ClickFocus</enum>
+   </property>
+   <widget class="QMenu" name="filemenu">
+    <property name="title">
+     <string>Ficheiro</string>
+    </property>
+    <widget class="QMenu" name="menu_new">
+     <property name="title">
+      <string>Novo</string>
+     </property>
+     <addaction name="new_dataset"/>
+     <addaction name="new_serie"/>
+     <addaction name="new_service"/>
+    </widget>
+    <addaction name="menu_new"/>
+    <addaction name="menu_open"/>
+    <addaction name="menu_add_dir"/>
+    <addaction name="separator"/>
+    <addaction name="menu_save"/>
+    <addaction name="menu_saveas"/>
+    <addaction name="menu_save_all"/>
+    <addaction name="separator"/>
+    <addaction name="menu_close"/>
+    <addaction name="menu_codelists"/>
+    <addaction name="menu_resave"/>
+   </widget>
+   <addaction name="filemenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="focusPolicy">
+    <enum>Qt::ClickFocus</enum>
+   </property>
+  </widget>
+  <action name="new_dataset">
+   <property name="text">
+    <string>Conjunto de Dados Geograficos</string>
+   </property>
+  </action>
+  <action name="menu_save">
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </action>
+  <action name="menu_saveas">
+   <property name="text">
+    <string>Guardar como</string>
+   </property>
+  </action>
+  <action name="menu_close">
+   <property name="text">
+    <string>Fechar</string>
+   </property>
+  </action>
+  <action name="menu_open">
+   <property name="text">
+    <string>Abrir</string>
+   </property>
+  </action>
+  <action name="menu_add_dir">
+   <property name="text">
+    <string>Abrir Pasta</string>
+   </property>
+  </action>
+  <action name="new_serie">
+   <property name="text">
+    <string>Série</string>
+   </property>
+  </action>
+  <action name="new_service">
+   <property name="text">
+    <string>Serviço</string>
+   </property>
+  </action>
+  <action name="menu_save_all">
+   <property name="text">
+    <string>Guardar Todos</string>
+   </property>
+  </action>
+  <action name="menu_codelists">
+   <property name="text">
+    <string>Atualizar Codelists</string>
+   </property>
+  </action>
+  <action name="menu_resave">
+   <property name="text">
+    <string>Atualizar Metadados</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
