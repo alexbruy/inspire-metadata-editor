@@ -39,7 +39,7 @@ from qgis.PyQt.QtCore import Qt, QPoint, QUrl, pyqtSlot
 from qgis.PyQt.QtWidgets import QApplication, QPushButton, QHeaderView, QMenu, QAction, QProgressDialog, QProgressBar, QMessageBox, QAbstractItemView, QMainWindow, QWidget, QLineEdit, QTabBar, QFileDialog
 from qgis.PyQt.QtGui import QFont, QKeySequence, QDesktopServices
 
-from inspire_metadata_editor.snimarEditorController.dialogs.about import About
+#from inspire_metadata_editor.snimarEditorController.dialogs.about import About
 from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tableaux
 from inspire_metadata_editor.snimarEditorController.dialogs.update_dialog import SNIMarThesaurusUpdateDialog
 from inspire_metadata_editor.snimarProfileModel import service
@@ -50,6 +50,8 @@ from inspire_metadata_editor.snimarProfileModel import snimarProfileModel, valid
 from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import snimarEditorMainWindow
 from inspire_metadata_editor.snimarEditorController.dialogs import contacts_dialog
 from inspire_metadata_editor.snimarEditorController.models.delegates import ButtonDelegate
+
+from inspire_metadata_editor.gui.about_dialog import AboutDialog
 
 from inspire_metadata_editor.constants import PLUGIN_ROOT, SNIMAR_THESAURUS_META, CODELIST_SERVER_URL, SNIMAR_BASE_DIR, Scopes
 
@@ -77,7 +79,7 @@ class EditorWindow(BASE, WIDGET):
         self.load_codelists()
         if platform.system() != "Linux":
             font = QFont()
-            font.setFamily(u"Segoe UI Symbol")
+            font.setFamily("Segoe UI Symbol")
             self.setFont(font)
 
         self.tracked_list = filemanager.FileManager(to_save=True, editordir=self.editor_dirname())
@@ -92,7 +94,7 @@ class EditorWindow(BASE, WIDGET):
             btn.setFocusPolicy(Qt.NoFocus)
 
         self.showMaximized()
-        self.setWindowTitle(u'Editor de Metadados Marsw Inforbiomares')
+        self.setWindowTitle(self.tr("INSPIRE Metadata Editor"))
 
         # Shortcuts
         shortcut_open = QKeySequence(Qt.CTRL + Qt.Key_O)
@@ -114,9 +116,9 @@ class EditorWindow(BASE, WIDGET):
         self.menu_codelists.triggered.connect(self.refresh_codelist)
         self.menu_resave.triggered.connect(self.resave_all_in_list)
 
-        contact_list = self.menubar.addAction("Lista de Contactos")
+        contact_list = self.menubar.addAction(self.tr("Lista de Contactos"))
         contact_list.triggered.connect(self.open_list_contacts)
-        about = self.menubar.addAction("Sobre")
+        about = self.menubar.addAction(self.tr("Sobre"))
         about.triggered.connect(self.open_about)
         self.menubar.setNativeMenuBar(False)
 
@@ -129,8 +131,8 @@ class EditorWindow(BASE, WIDGET):
         self.filetable.setWordWrap(True)
         self.filetable.setTextElideMode(Qt.ElideNone)
         tableaux.setupTableView(self, self.filetable,
-                                [u'Tipo', u'Título', u'Localização', u'Identificador Único Do Ficheiro',
-                                 u'Conformidade*', u''],
+                                [self.tr('Tipo'), self.tr('Título'), self.tr('Localização'), self.tr('Identificador Único Do Ficheiro'),
+                                 self.tr('Conformidade*'), ''],
                                 type_mapping, None, model_data=filetable_data)
         self.filetable.horizontalHeader().setMinimumSectionSize(29)
         self.filetable.horizontalHeader().setCascadingSectionResizes(False)
@@ -175,25 +177,22 @@ class EditorWindow(BASE, WIDGET):
                 try:
                     thesaurus.set_version_params()
                 except Exception as e:
-                    QMessageBox().critical(self,
-                                                u'Erro ao atualizar o Thesaurus SNIMar',
-                                                u'Ocorreu um erro ao atualizar o Thesaurus SNIMar. Por favor '
-                                                u'verifique o estado da sua ligação à rede.\nEntretanto, '
-                                                u'poderá continuar ' + \
-                                                u'a utilizar o editor com uma versão anterior do Thesaurus.' + \
-                                                u'\nSe o problema persistir, por favor envie um email para '
-                                                u'suporte.snimar@ipma.pt e inclua o seguinte texto:\n\n{}'.format(
-                                                    e.message),
-                                                u'OK')
+                    QMessageBox().critical(self, self.tr(
+                                                'Erro ao atualizar o Thesaurus SNIMar'),
+                                                self.tr('Ocorreu um erro ao atualizar o Thesaurus SNIMar. Por favor '
+                                                'verifique o estado da sua ligação à rede.\nEntretanto, '
+                                                'poderá continuar a utilizar o editor com uma versão anterior do Thesaurus.\n'
+                                                'Se o problema persistir, por favor envie um email para '
+                                                f'suporte.snimar@ipma.pt e inclua o seguinte texto:\n\n{e.message}'),
+                                                self.tr('OK'))
                 else:
                     if datetime.datetime.now() - last_download > datetime.timedelta(hours=24):
                         if thesaurus.latest_stable_version != meta[
                             'current_version'] or thesaurus.latest_unstable_version_date != meta[
                             'last_update']:
                             update_question_dialog = QMessageBox()
-                            reply = update_question_dialog.question(self, u'Actualização do Thesaurus SNIMar',
-                                                                    u'Existe uma nova versão do Thesaurus SNIMar. '
-                                                                    u'Pretende actualizar agora?',
+                            reply = update_question_dialog.question(self, self.tr('Actualização do Thesaurus SNIMar'),
+                                                                    self.tr('Existe uma nova versão do Thesaurus SNIMar. Pretende actualizar agora?'),
                                                                     QMessageBox.Yes | QMessageBox.No)
                             if reply == QMessageBox.Yes:
                                 self.launch_update()
@@ -205,11 +204,11 @@ class EditorWindow(BASE, WIDGET):
         self.btn_conform_all.pressed.connect(self.check_conformity_all)
 
         # Table Actions
-        self.visualize_action = QAction(u"Visualizar Metadado Externamente", self)
+        self.visualize_action = QAction(self.tr("Visualizar Metadado Externamente"), self)
         self.visualize_action.triggered.connect(self.visualize_file)
-        self.remove_action = QAction(u"Remover Metadado(s) da Lista", self)
+        self.remove_action = QAction(self.tr("Remover Metadado(s) da Lista"), self)
         self.remove_action.triggered.connect(lambda: self.tab_close(None, remove=True))
-        self.edit_action = QAction(u"Editar Metadado(s)", self)
+        self.edit_action = QAction(self.tr("Editar Metadado(s)"), self)
         self.edit_action.triggered.connect(self.edit_meta)
         # table contextMenus
         self.menu_single = QMenu()
@@ -245,7 +244,7 @@ class EditorWindow(BASE, WIDGET):
     def new_metadata_xml_tab(self, scope):
         """Slot to create a new tab without loading any XML file."""
         widget = MetadadoSNIMar(self, scope)
-        new_tmp_name = u'Novo Ficheiro'
+        new_tmp_name = self.tr('Novo Ficheiro')
         if self.tmp_file_index > 0:
             new_tmp_name += '(' + str(self.tmp_file_index) + ')'
 
@@ -273,8 +272,8 @@ class EditorWindow(BASE, WIDGET):
         if name[0] is None:
             file_dialog = QFileDialog(self)
             #file_dialog.setFilter(u"XML files (*.xml);;All Files (*.*)")
-            filters = "XML files (*.xml);;All Files (*.*)"
-            doc_names = file_dialog.getOpenFileName(self, u'Abrir ficheiro XML', self.last_open_dir, filters)
+            filters = self.tr("XML files (*.xml);;All Files (*.*)")
+            doc_names = file_dialog.getOpenFileName(self, self.tr('Abrir ficheiro XML'), self.last_open_dir, filters)
             doc_names = [doc_names[0]]
         else:
             doc_names = [name[0]]
@@ -299,14 +298,11 @@ class EditorWindow(BASE, WIDGET):
                     open(doc, "r")
                 except IOError as e:
                     message = QMessageBox(self)
-                    message.setWindowTitle(u'Erro ao abrir o ficheiro')
+                    message.setWindowTitle(self.tr('Erro ao abrir o ficheiro'))
                     message.setIcon(QMessageBox.Critical)
-                    message.setText(
-                        u'Ocorreu um erro ao abrir )o ficheiro %s.\nEste não é um ficheiro XML válido ou ja não '
-                        u'existe.\n Por favor seleccione '
-                        u'um '
-                        u'ficheiro '
-                        u'XML.' % doc)
+                    message.setText(self.tr(
+                        f'Ocorreu um erro ao abrir )o ficheiro {doc}.\nEste não é um ficheiro XML válido ou ja não '
+                        'existe.\n Por favor seleccione um ficheiro XML.'))
                     message.show()
                     self.tracked_list.pop(doc, None)
                     self.filetable.model().removeSpecificRow(name[1])
@@ -316,11 +312,11 @@ class EditorWindow(BASE, WIDGET):
 
                 if md is None:
                     message = QMessageBox(self)
-                    message.setWindowTitle(u'Erro ao abrir o ficheiro')
+                    message.setWindowTitle(self.tr('Erro ao abrir o ficheiro'))
                     message.setIcon(QMessageBox.Critical)
                     message.setText(
-                        u'Ocorreu um erro ao abrir o ficheiro %s.\nEste não é um ficheiro XML válido. Por favor '
-                        u'seleccione um ficheiro XML.' % doc)
+                        self.tr(f'Ocorreu um erro ao abrir o ficheiro {doc}.\nEste não é um ficheiro XML válido. Por favor '
+                        'seleccione um ficheiro XML.'))
                     message.show()
                     return
                 else:
@@ -334,11 +330,11 @@ class EditorWindow(BASE, WIDGET):
 
                     if common is None:
                         message = QMessageBox(self)
-                        message.setWindowTitle(u'Erro ao abrir o ficheiro')
+                        message.setWindowTitle(self.tr('Erro ao abrir o ficheiro'))
                         message.setIcon(QMessageBox.Critical)
-                        message.setText(
-                            u'Ocorreu um erro ao abrir o ficheiro %s.\nO metadado está corrupto. Por favor verifique '
-                            u'o conteúdo do ficheiro XML.' % doc)
+                        message.setText(self.tr(
+                            f'Ocorreu um erro ao abrir o ficheiro {doc}.\nO metadado está corrupto. Por favor verifique '
+                            'o conteúdo do ficheiro XML.'))
                         message.show()
                         return
 
@@ -347,7 +343,7 @@ class EditorWindow(BASE, WIDGET):
                         'doc_type': Scopes.get_rich_text_translation(md.hierarchy),
                         'id': md.identifier
                     }
-                    print('open_metadata_xml_file')
+                    #print('open_metadata_xml_file')
                     self.open_list.track_new_file(**filelist)
                     self.tabWidget.setCurrentIndex(self.tabWidget.addTab(meta, os.path.basename(doc)))
 
@@ -378,8 +374,8 @@ class EditorWindow(BASE, WIDGET):
         if flag == SAVEAS_FLAG or but_saveas:
             # Open the Save As dialog and get the filename for the new XML document. Then,
             # convert the filename to unicode.
-            doc_ = QFileDialog.getSaveFileName(self, u'Guardar ficheiro XML', self.last_open_dir,
-                                                    u"XML files (*.xml);;All Files (*.*)")[0]
+            doc_ = QFileDialog.getSaveFileName(self, self.tr('Guardar ficheiro XML'), self.last_open_dir,
+                                                    self.tr("XML files (*.xml);;All Files (*.*)"))[0]
 
             if doc_.strip() == "":
                 return
@@ -388,7 +384,7 @@ class EditorWindow(BASE, WIDGET):
                 doc = str(doc_)
             except UnicodeError as e:
                 # fix_print_with_import
-                print("ERROR:", e.message)
+                #print("ERROR:", e.message)
                 doc = doc_
 
             # Update the open_list for this entry
@@ -423,7 +419,7 @@ class EditorWindow(BASE, WIDGET):
 
             doc = self.open_list[name]['path']
 
-        self.statusbar.showMessage('A guardar...')
+        self.statusbar.showMessage(self.tr('A guardar...'))
 
         # Load data in UI into a buffer md object
         md = snimarProfileModel.MD_Metadata()
@@ -440,7 +436,6 @@ class EditorWindow(BASE, WIDGET):
                 fp.close()
                 self.statusbar.clearMessage()
                 self.statusbar.showMessage('Guardado', 2000)
-
 
             # Add to tracking system
             validity = self.tabWidget.currentWidget().is_doc_Snimar_Valid()
@@ -569,10 +564,9 @@ class EditorWindow(BASE, WIDGET):
             lambda: self.loadContactObject(self.dialog.output_contact()))
         self.dialog.exec_()
 
-    @pyqtSlot()
     def open_about(self):
-        self.about = About()
-        self.about.exec_()
+        dlg = AboutDialog()
+        dlg.exec_()
 
     def check_validity_not_open_file(self, name, index):
         # Get the filename
@@ -595,14 +589,11 @@ class EditorWindow(BASE, WIDGET):
                 open(doc, "r")
             except IOError:
                 message = QMessageBox(self)
-                message.setWindowTitle(u'Erro ao abrir o ficheiro')
+                message.setWindowTitle(self.tr('Erro ao abrir o ficheiro'))
                 message.setIcon(QMessageBox.Critical)
-                message.setText(
-                    u'Ocorreu um erro ao abrir o ficheiro %s.\nEste não é um ficheiro XML válido ou ja não existe.\n '
-                    u'Por favor seleccione '
-                    u'um '
-                    u'ficheiro '
-                    u'XML.' % doc)
+                message.setText(self.tr(
+                    f'Ocorreu um erro ao abrir o ficheiro {doc}.\nEste não é um ficheiro XML válido ou ja não existe.\n '
+                    'Por favor seleccione um ficheiro XML.'))
                 message.show()
                 self.tracked_list.pop(doc, None)
                 self.filetable.model().removeSpecificRow(index - 1)
@@ -610,11 +601,11 @@ class EditorWindow(BASE, WIDGET):
             md = validation.validate(doc)
             if md is None:
                 message = QMessageBox(self)
-                message.setWindowTitle(u'Erro ao abrir o ficheiro')
+                message.setWindowTitle(self.tr('Erro ao abrir o ficheiro'))
                 message.setIcon(QMessageBox.Critical)
-                message.setText(
-                    u'Ocorreu um erro ao abrir o ficheiro %s.\nEste não é um ficheiro XML válido. Por favor '
-                    u'seleccione um ficheiro XML.' % doc)
+                message.setText(self.tr(
+                    f'Ocorreu um erro ao abrir o ficheiro {doc}.\nEste não é um ficheiro XML válido. Por favor '
+                    'seleccione um ficheiro XML.'))
                 message.show()
                 return None
             else:
@@ -635,7 +626,7 @@ class EditorWindow(BASE, WIDGET):
 
     def close_editor(self):
         try:
-            os.remove(os.path.join(os.path.dirname(__file__), "userFiles/.meLock"))
+            os.remove(os.path.join(PLUGIN_ROOT, "userFiles", ".meLock"))
         except OSError:
 
             pass
@@ -643,7 +634,7 @@ class EditorWindow(BASE, WIDGET):
 
     def closeEvent(self, close_event):
         try:
-            os.remove(os.path.join(os.path.dirname(__file__), "userFiles/.meLock"))
+            os.remove(os.path.join(PLUGIN_ROOT, "userFiles", ".meLock"))
         except OSError:
             pass
 
@@ -657,16 +648,14 @@ class EditorWindow(BASE, WIDGET):
         try:
             self.update_dialog.update_thesaurus()
         except Exception as e:
-            crit = QMessageBox(QMessageBox.Critical, u'Erro ao atualizar o Thesaurus SNIMar',
-                                    u'Ocorreu um erro ao atualizar o Thesaurus SNIMar. Por favor verifique o estado '
-                                    u'da sua ligação à rede.\nEntretanto, poderá continuar ' + \
-                                    u'a utilizar o editor com uma versão anterior do Thesaurus.' + \
-                                    u'\nSe o problema persistir, por favor envie um email para suporte.snimar@ipma.pt '
-                                    u'e inclua o seguinte texto:\n\n{}'.format(
-                                        e.message))
+            crit = QMessageBox(QMessageBox.Critical, self.tr('Erro ao atualizar o Thesaurus SNIMar'),
+                                    self.tr('Ocorreu um erro ao atualizar o Thesaurus SNIMar. Por favor verifique o estado '
+                                    'da sua ligação à rede.\nEntretanto, poderá continuar '
+                                    'a utilizar o editor com uma versão anterior do Thesaurus.'
+                                    '\nSe o problema persistir, por favor envie um email para suporte.snimar@ipma.pt '
+                                    f'e inclua o seguinte texto:\n\n{e.message}'))
             crit.setWindowFlags(crit.windowFlags() | Qt.WindowStaysOnTopHint)
             crit.exec_()
-
         else:
             # Update the GUI stuff
             #self.thesaurus_version.setText(self.update_dialog.thesaurus.latest_stable_version)
@@ -681,7 +670,6 @@ class EditorWindow(BASE, WIDGET):
         # Close dialog
         self.update_dialog.accept()
 
-    @pyqtSlot()
     def use_unstable(self):
         #if self.thesaurus_unstable_checkbox.isChecked():
         if True:
@@ -707,14 +695,13 @@ class EditorWindow(BASE, WIDGET):
             os.mkdir(self.editor_dirname())
 
     def erase_all(self):
-
         message = QMessageBox()
         message.setModal(True)
-        message.setWindowTitle(u'Apagar Lista de Ficheiros')
+        message.setWindowTitle(self.tr('Apagar Lista de Ficheiros'))
         message.setIcon(QMessageBox.Warning)
-        message.setText(u"Tem a certeza que deseja apagar todos os metadados da lista?\n(Operação Irreversivel!)")
-        message.addButton(u'Remover Todos', QMessageBox.AcceptRole)
-        message.addButton(u'Cancelar', QMessageBox.RejectRole)
+        message.setText(self.tr("Tem a certeza que deseja apagar todos os metadados da lista?\n(Operação Irreversivel!)"))
+        message.addButton(self.tr('Remover Todos'), QMessageBox.AcceptRole)
+        message.addButton(self.tr('Cancelar'), QMessageBox.RejectRole)
         ret = message.exec_()
         if not ret == QMessageBox.AcceptRole:
             return
@@ -727,10 +714,10 @@ class EditorWindow(BASE, WIDGET):
 
     def check_conformity_all(self):
 
-        progress_dialog = QProgressDialog(u"Esta operação pode ser demorada, aguarde...   ", u"Cancelar", 0,
+        progress_dialog = QProgressDialog(self.tr("Esta operação pode ser demorada, aguarde..."), self.tr("Cancelar"), 0,
                                           len(self.filetable.model().matrix))
         progress_dialog.setWindowModality(Qt.WindowModal)
-        progress_dialog.setWindowTitle(u"Validar Todos os Metadados")
+        progress_dialog.setWindowTitle(self.tr("Validar Todos os Metadados"))
         progress_dialog.adjustSize()
         pb = progress_dialog.findChild(QProgressBar)
         if pb:
@@ -773,35 +760,34 @@ class EditorWindow(BASE, WIDGET):
             try:
                 response = urllib.request.urlopen(url)
                 data = json.loads(response.read())
-                with open(os.path.join(SNIMAR_BASE_DIR, "resourcesFolder/CodeLists/" + x), 'w+') as outfile:
+                with open(os.path.join(SNIMAR_BASE_DIR, "resourcesFolder", "CodeLists", x), 'w+') as outfile:
                     json.dump(data, outfile)
             except urllib.error.HTTPError as e:
                 # fix_print_with_import
-                print("ERROR:", e.reason())
-                crit = QMessageBox(QMessageBox.Critical, u'Erro ao atualizar as CodeLists',
-                                        u'Ocorreu um erro ao atualizar as CodeLists SNIMar. Por favor verifique o '
-                                        u'estado da sua ligação à rede.\nEntretanto, poderá continuar ' + \
-                                        u'a utilizar o editor com a versão anterior das CodeLists.' + \
-                                        u'\nSe o problema persistir, por favor envie um email para '
-                                        u'suporte.snimar@ipma.pt e inclua o seguinte texto:\n\n{}'.format(
-                                            e.message))
+                #print("ERROR:", e.reason())
+                crit = QMessageBox(QMessageBox.Critical, self.tr('Erro ao atualizar as CodeLists'),
+                                        self.tr('Ocorreu um erro ao atualizar as CodeLists SNIMar. Por favor verifique o '
+                                        'estado da sua ligação à rede.\nEntretanto, poderá continuar '
+                                        'a utilizar o editor com a versão anterior das CodeLists.'
+                                        '\nSe o problema persistir, por favor envie um email para '
+                                        f'suporte.snimar@ipma.pt e inclua o seguinte texto:\n\n{e.message}'))
                 crit.setWindowFlags(crit.windowFlags() | Qt.WindowStaysOnTopHint)
                 crit.exec_()
 
         message = QMessageBox()
         message.setModal(True)
-        message.setWindowTitle(u'CodeLists Actualizadas')
+        message.setWindowTitle(self.tr('CodeLists Actualizadas'))
         message.setIcon(QMessageBox.Information)
-        message.setText(u"Reinicie o Editor para refletir as alterações")
-        message.addButton(u'OK', QMessageBox.AcceptRole)
+        message.setText(self.tr("Reinicie o Editor para refletir as alterações"))
+        message.addButton(self.tr('OK'), QMessageBox.AcceptRole)
         ret = message.exec_()
 
     def resave_all_in_list(self):
 
-        progress_dialog = QProgressDialog(u"Esta operação pode ser demorada, aguarde...   ", u"Cancelar", 0,
+        progress_dialog = QProgressDialog(self.tr("Esta operação pode ser demorada, aguarde..."), self.tr("Cancelar"), 0,
                                           len(self.filetable.model().matrix))
         progress_dialog.setWindowModality(Qt.WindowModal)
-        progress_dialog.setWindowTitle(u"Atualizar Metadados")
+        progress_dialog.setWindowTitle(self.tr("Atualizar Metadados"))
         progress_dialog.adjustSize()
         pb = progress_dialog.findChild(QProgressBar)
         if pb:
