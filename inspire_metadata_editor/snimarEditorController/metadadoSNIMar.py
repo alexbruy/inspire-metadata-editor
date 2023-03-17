@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 ##############################################################################
 #
 #  Title:   snimarEditorController/metadadoSNIMar.py
@@ -24,16 +25,14 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-from qgis.PyQt import QtGui as qgui, QtCore as qcore
+
 import os
 import platform
-from qgis.utils import pluginDirectory
+
 from qgis.PyQt.QtCore import Qt, QSize
 from qgis.PyQt.QtGui import QFont, QColor, QIcon
 from qgis.PyQt.QtWidgets import QWidget, QListWidget, QPushButton, QGridLayout, QListWidgetItem, QStackedWidget
-from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
-import EditorMetadadosMarswInforbiomares.CONSTANTS as cons
-#from EditorMetadadosMarswInforbiomares import snimarEditorController
+
 from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
 
 from inspire_metadata_editor.snimarEditorController.identification import IdentificationWidget
@@ -46,12 +45,14 @@ from inspire_metadata_editor.snimarEditorController.restrictions import Restrict
 from inspire_metadata_editor.snimarEditorController.distribution import DistributionWidget
 from inspire_metadata_editor.snimarEditorController.metadata import MetadataWidget
 
+from inspire_metadata_editor.constants import PLUGIN_ROOT, TABLIST_SERVICES, TABLIST_CDG_SERIES, ERROR_COLOR, Scopes
+
 
 class MetadadoSNIMar(QWidget):
     def __init__(self, parent, scope=None, xml_doc=None, md=None):
         super(MetadadoSNIMar, self).__init__(parent)
         if scope is None:
-            self.scope = SCOPES.get_code_representation(md.hierarchy)
+            self.scope = Scopes.get_code_representation(md.hierarchy)
         else:
             self.scope = scope
 
@@ -70,13 +71,13 @@ class MetadadoSNIMar(QWidget):
         self.sidelist.setIconSize(QSize(25, 25))
         self.sidelist.clicked.connect(self.list_clicked)
         index = 0
-        if self.scope == SCOPES.SERVICES:
-            tabs = cons.TABLIST_SERVICES
+        if self.scope == Scopes.SERVICES:
+            tabs = TABLIST_SERVICES
         else:
-            tabs = cons.TABLIST_CDG_SERIES
+            tabs = TABLIST_CDG_SERIES
 
         for tab_element in tabs:
-            bufWidget = QListWidgetItem(qgui.QIcon(':/resourcesFolder/icons/' + tab_element[1]), tab_element[0])
+            bufWidget = QListWidgetItem(QIcon(':/resourcesFolder/icons/' + tab_element[1]), tab_element[0])
             self.widgetStalker[tab_element[2]] = {"widget": bufWidget,
                                                   "missingFields": set(),
                                                   "incompleteEntries": set()}
@@ -97,7 +98,7 @@ class MetadadoSNIMar(QWidget):
         self.codelist = self.parent().codelists
         self.helps = self.parent().helps
         self.orgs = self.parent().orgs
-        f = open(os.path.join(pluginDirectory('EditorMetadadosMarswInforbiomares'), 'resourcesFolder/stylesheet.qtcss'))
+        f = open(os.path.join(PLUGIN_ROOT, 'resourcesFolder', 'stylesheet.qtcss'))
         self.sytlesheet = f.read()
         for btn in self.findChildren(QPushButton):
             btn.setStyleSheet(self.sytlesheet)
@@ -108,7 +109,7 @@ class MetadadoSNIMar(QWidget):
         # Setup snimarEditorController
         self.identification = IdentificationWidget(self, self.scope)
         tab_list.append(self.identification)
-        if self.scope == SCOPES.SERVICES:
+        if self.scope == Scopes.SERVICES:
             self.operations = ServiceOperationsWidget(self)
             tab_list.append(self.operations)
         self.keywords = KeywordsWidget(self, self.scope)
@@ -130,7 +131,7 @@ class MetadadoSNIMar(QWidget):
         if not self.is_new_file:
             # Setup data
             self.identification.set_data(self.md)
-            if self.scope == SCOPES.SERVICES:
+            if self.scope == Scopes.SERVICES:
                 self.operations.set_data(md)
             self.temporalinfo.set_data(self.md)
             self.keywords.set_data(self.md)
@@ -142,7 +143,7 @@ class MetadadoSNIMar(QWidget):
 
     def setupUi(self):
         self.widgetstack.addWidget(self.identification)
-        if self.scope == SCOPES.SERVICES:
+        if self.scope == Scopes.SERVICES:
             self.widgetstack.addWidget(self.operations)
         self.widgetstack.addWidget(self.keywords)
         self.widgetstack.addWidget(self.geographicinfo)
@@ -158,7 +159,6 @@ class MetadadoSNIMar(QWidget):
         self.setLayout(self.grid)
         self.widgetstack.setCurrentIndex(0)
 
-    @qcore.pyqtSlot()
     def list_clicked(self):
         index = self.sidelist.currentRow()
         if index != self.current_index:
@@ -166,13 +166,13 @@ class MetadadoSNIMar(QWidget):
             self.current_index = index
 
     def get_tab_data(self, md):
-        if self.scope != SCOPES.SERVICES:
+        if self.scope != Scopes.SERVICES:
             md.identification = snimarProfileModel.MD_DataIdentification()
         else:
             md.serviceidentification = snimarProfileModel.SV_ServiceIdentification()
 
         self.identification.get_data(md)
-        if self.scope == SCOPES.SERVICES:
+        if self.scope == Scopes.SERVICES:
             self.operations.get_data(md)
         self.keywords.get_data(md)
         self.geographicinfo.get_data(md)
@@ -196,7 +196,7 @@ class MetadadoSNIMar(QWidget):
     def register_mandatory_missingfield(self, widgetName, fieldName):
         self.widgetStalker[widgetName]["missingFields"].add(fieldName.replace(u'\u26a0', '').strip())
         self.widgetStalker[widgetName]["widget"].setToolTip(self.genToolTip(widgetName))
-        self.widgetStalker[widgetName]["widget"].setForeground(QColor(cons.ERROR_COLOR))
+        self.widgetStalker[widgetName]["widget"].setForeground(QColor(ERROR_COLOR))
 
         self.widgetStalker[widgetName]["widget"].setText(
             self.widgetStalker[widgetName]["widget"].text().replace(u'\u26a0', '') + u'\u26a0')
@@ -215,7 +215,7 @@ class MetadadoSNIMar(QWidget):
     def register_incomplete_entries(self, widgetName, fieldName):
         self.widgetStalker[widgetName]["incompleteEntries"].add(fieldName.replace(u'\u26a0', '').strip())
         self.widgetStalker[widgetName]["widget"].setToolTip(self.genToolTip(widgetName))
-        self.widgetStalker[widgetName]["widget"].setForeground(QColor(cons.ERROR_COLOR))
+        self.widgetStalker[widgetName]["widget"].setForeground(QColor(ERROR_COLOR))
         self.widgetStalker[widgetName]["widget"].setText(self.widgetStalker[widgetName]["widget"].text().replace(u'\u26a0', '') + u'\u26a0')
 
     def unregister_incomplete_entries(self, widgetName, fieldName):
@@ -231,22 +231,22 @@ class MetadadoSNIMar(QWidget):
     def genToolTip(self, widgetName):
         tooltip = ""
         if len(self.widgetStalker[widgetName]["missingFields"]) > 0:
-            tooltip += u"Campos Obrigatórios\nem falta:\n-" + "\n-".join(self.widgetStalker[widgetName]["missingFields"])
+            tooltip += self.tr("Campos Obrigatórios\nem falta:\n-") + "\n-".join(self.widgetStalker[widgetName]["missingFields"])
         if len(self.widgetStalker[widgetName]["missingFields"]) > 0 and len(self.widgetStalker[widgetName]["incompleteEntries"]) > 0:
             tooltip += u"\n---------------------\n"
         if len(self.widgetStalker[widgetName]["incompleteEntries"]) > 0:
-            tooltip += u"Campos Incompletos\Incorrectos:\n-" + "\n-".join(self.widgetStalker[widgetName]["incompleteEntries"])
+            tooltip += self.tr("Campos Incompletos\Incorrectos:\n-") + "\n-".join(self.widgetStalker[widgetName]["incompleteEntries"])
         tooltip += u"\n---------------------\n"
-        return tooltip + u"\nA Conformidade diz respeito\n" \
-                         u"as obrigações de formato " \
-                         u"\ne completude do documento.\n" \
-                         u"A validade do conteúdo é da\n" \
-                         u"inteira responsabilidade\n" \
-                         u"do utilizador. "
+        return tooltip + self.tr("\nA Conformidade diz respeito\n"
+                         "as obrigações de formato "
+                         "\ne completude do documento.\n"
+                         "A validade do conteúdo é da\n"
+                         "inteira responsabilidade\n"
+                         "do utilizador.")
 
 
 def vality_msg(validity):
     if validity:
-        return u"Conforme Perfil SNIMar"
+        return "Conforme Perfil SNIMar"
     else:
         return u"Não Conforme Perfil SNIMar"
