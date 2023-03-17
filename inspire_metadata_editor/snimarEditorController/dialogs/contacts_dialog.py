@@ -40,6 +40,7 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import cust
 
 from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import contactListManagerWindow
 
+from inspire_metadata_editor.gui.add_organization_dialog import AddOrganizationDialog
 from inspire_metadata_editor.constants import PLUGIN_ROOT
 
 WIDGET, BASE = uic.loadUiType(os.path.join(PLUGIN_ROOT, "ui", "contacts_dialog.ui"))
@@ -92,17 +93,8 @@ class ContactsDialog(WIDGET, BASE):
 
         # SETUP THE DIALOG MODE
         if edition_mode:  # EDITION MODE
+            self.populate_organizations()
 
-            self.orgs = {}
-            org = self.superParent.orgs
-            for x in org:
-                name = org[x] + " (" + x + ")"
-                self.orgs[x] = cus.CodeListItem(name, name, name)
-
-            self.combo_org.setModel(
-                cus.CustomComboBoxModel(self,
-                                        [cus.CodeListItem(OUTRA, OUTRA, OUTRA)] + sorted(list(self.orgs.values()),
-                                                                                         key=lambda x: x.term_pt)))
             self.combo_org.currentIndexChanged.connect(self.check_org)
             self.btn_contact_add.setVisible(True)
             self.btn_contact_del.setVisible(True)
@@ -416,4 +408,30 @@ class ContactsDialog(WIDGET, BASE):
             self.organization.setText(org_name)
 
     def add_new_organization(self):
-        pass
+        dlg = AddOrganizationDialog(self)
+        if dlg.exec_() == QDialog.Accepted:
+            short_name = dlg.short_name()
+            full_name = dlg.full_name()
+
+            if short_name in self.superParent.orgs:
+                QMessageBox.warning(self, self.tr("Duplicate organization"), self.tr(f"Organization with '{short_name}' short name already exists!"))
+                return
+
+            self.superParent.orgs[short_name] = full_name
+            with open(os.path.join(PLUGIN_ROOT, "resourcesFolder", "CodeLists", "SNIMar_ORGS.json"), "w", encoding="utf-8") as f:
+                json.dump(self.superParent.orgs, f)
+
+            self.populate_organizations()
+
+    def populate_organizations(self):
+        self.orgs = {}
+        org = self.superParent.orgs
+
+        for x in org:
+            name = org[x] + " (" + x + ")"
+            self.orgs[x] = cus.CodeListItem(name, name, name)
+
+        self.combo_org.setModel(
+            cus.CustomComboBoxModel(self,
+                                    [cus.CodeListItem(OUTRA, OUTRA, OUTRA)] + sorted(list(self.orgs.values()),
+                                                                                     key=lambda x: x.term_pt)))
