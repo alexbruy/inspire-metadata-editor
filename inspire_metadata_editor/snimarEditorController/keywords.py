@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 ##############################################################################
 #
 #  Title:   snimarEditorController/keywords.py
@@ -25,32 +26,23 @@
 #
 ###############################################################################
 
-# Qt and Qgis imports
-from builtins import range
+import os
 import copy
 import datetime
-from qgis.PyQt import QtCore as qcore
-from qgis.PyQt import QtGui as qgui
 import uuid
-from qgis.PyQt.QtCore import Qt
+
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import Qt, QRegExp, QDate
 from qgis.PyQt.QtWidgets import QAbstractItemView, QToolTip, QDateTimeEdit, QWidget, QLineEdit, QHeaderView, QDateEdit, QPushButton, QComboBox, QMessageBox
 from qgis.PyQt.QtGui import QIcon, QCursor, QStandardItem, QStandardItemModel
-from qgis._gui import QgsFilterLineEdit
 
-# Snimar Constants
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
+from qgis.gui import QgsFilterLineEdit
 
-# Snimar Qt ui generated files
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import keywordsPanel
-
-# Dialogs
 from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.freekeywords_dialog import FreeKeyWordsDialog
 from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.snimarKeywordsDialog import SNIMARKeywordsDialog
 from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.wormsKeywordsDialog import WormsKeywordsDialog
 from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.crossrefKeywordsDialog import CrossrefKeywordsDialog
 
-# Snimar Controller and Model imports
 from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import tablesRowsValidation as tval
@@ -59,10 +51,14 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import cust
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import TableModel
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed, setLabelRed
 
+from inspire_metadata_editor.constants import PLUGIN_ROOT, SNIMAR_KEYWORDS_MANDATORY_TYPES, DATE_FORMAT, Scopes
 
-class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
+WIDGET, BASE = uic.loadUiType(os.path.join(PLUGIN_ROOT, "ui", "keywords_widget.ui"))
+
+
+class KeywordsWidget(BASE, WIDGET):
     def __init__(self, parent, scope):
-        super(KeywordsWidget, self).__init__(parent)
+        super().__init__(parent)
         self.setupUi(self)
 
         self.superParent = self.parent()
@@ -98,34 +94,49 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
         self.btn_open_snimarkeywords.clicked.connect(self.snimar_dialog)
         self.btn_del_snimarkeywords.clicked.connect(lambda: tla.removeSelectedFromList(self.snimarkeywords))
 
-        self.wormskeywords.setColumnHidden(1, True)
-        worms_model = TableModel(self, ['Palavra-chave', 'date'], [QLineEdit, QLineEdit], self.wormskeywords)
-        self.wormskeywords.setModel(worms_model)
-        self.wormskeywords.setColumnHidden(1, True)
-        self.wormskeywords.resizeColumnsToContents()
-        self.wormskeywords.verticalHeader().setVisible(False)
-        self.wormskeywords.resizeRowsToContents()
-        self.wormskeywords.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.wormskeywords.setSelectionMode(QAbstractItemView.ContiguousSelection)
-        self.wormskeywords.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.btn_open_wormskeywords.clicked.connect(self.worms_dialog)
-        self.btn_del_wormskeyword.clicked.connect(lambda: tla.removeSelectedFromList(self.wormskeywords))
+        # temporarily hide worms and cross-ref keywords
+        self.info_label_worms.hide()
+        self.label_worms.hide()
+        self.wormskeywords.hide()
+        self.btn_open_wormskeywords.hide()
+        #self.verticalSpacer_2.hide()
+        self.btn_del_wormskeyword.hide()
 
-        #crossref_model = TableModel(self, ['Autor', 'Titulo'], [QLineEdit, QLineEdit], self.crossrefkeywords)
-        self.crossrefkeywords.setColumnHidden(1, True)
-        self.crossrefkeywords.setColumnHidden(2, True)
-        crossref_model = TableModel(self, ['Palavra-chave', 'doi', 'date'], [QLineEdit, QLineEdit, QLineEdit], self.crossrefkeywords)
-        self.crossrefkeywords.setModel(crossref_model)
-        self.crossrefkeywords.setColumnHidden(1, True)
-        self.crossrefkeywords.setColumnHidden(2, True)
-        self.crossrefkeywords.resizeColumnsToContents()
-        self.crossrefkeywords.verticalHeader().setVisible(False)
-        self.crossrefkeywords.resizeRowsToContents()
-        self.crossrefkeywords.setSelectionBehavior(QAbstractItemView.SelectRows)
-        self.crossrefkeywords.setSelectionMode(QAbstractItemView.ContiguousSelection)
-        self.crossrefkeywords.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-        self.btn_open_crossrefkeywords.clicked.connect(self.crossref_dialog)
-        self.btn_del_crossrefkeyword.clicked.connect(lambda: tla.removeSelectedFromList(self.crossrefkeywords))
+        self.info_label_crossref.hide()
+        self.label_crossref.hide()
+        self.crossrefkeywords.hide()
+        self.btn_open_crossrefkeywords.hide()
+        #self.verticalSpacer_5.hide()
+        self.btn_del_crossrefkeyword.hide()
+
+        # ~ self.wormskeywords.setColumnHidden(1, True)
+        # ~ worms_model = TableModel(self, ['Palavra-chave', 'date'], [QLineEdit, QLineEdit], self.wormskeywords)
+        # ~ self.wormskeywords.setModel(worms_model)
+        # ~ self.wormskeywords.setColumnHidden(1, True)
+        # ~ self.wormskeywords.resizeColumnsToContents()
+        # ~ self.wormskeywords.verticalHeader().setVisible(False)
+        # ~ self.wormskeywords.resizeRowsToContents()
+        # ~ self.wormskeywords.setSelectionBehavior(QAbstractItemView.SelectRows)
+        # ~ self.wormskeywords.setSelectionMode(QAbstractItemView.ContiguousSelection)
+        # ~ self.wormskeywords.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # ~ self.btn_open_wormskeywords.clicked.connect(self.worms_dialog)
+        # ~ self.btn_del_wormskeyword.clicked.connect(lambda: tla.removeSelectedFromList(self.wormskeywords))
+
+        # ~ #crossref_model = TableModel(self, ['Autor', 'Titulo'], [QLineEdit, QLineEdit], self.crossrefkeywords)
+        # ~ self.crossrefkeywords.setColumnHidden(1, True)
+        # ~ self.crossrefkeywords.setColumnHidden(2, True)
+        # ~ crossref_model = TableModel(self, ['Palavra-chave', 'doi', 'date'], [QLineEdit, QLineEdit, QLineEdit], self.crossrefkeywords)
+        # ~ self.crossrefkeywords.setModel(crossref_model)
+        # ~ self.crossrefkeywords.setColumnHidden(1, True)
+        # ~ self.crossrefkeywords.setColumnHidden(2, True)
+        # ~ self.crossrefkeywords.resizeColumnsToContents()
+        # ~ self.crossrefkeywords.verticalHeader().setVisible(False)
+        # ~ self.crossrefkeywords.resizeRowsToContents()
+        # ~ self.crossrefkeywords.setSelectionBehavior(QAbstractItemView.SelectRows)
+        # ~ self.crossrefkeywords.setSelectionMode(QAbstractItemView.ContiguousSelection)
+        # ~ self.crossrefkeywords.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # ~ self.btn_open_crossrefkeywords.clicked.connect(self.crossref_dialog)
+        # ~ self.btn_del_crossrefkeyword.clicked.connect(lambda: tla.removeSelectedFromList(self.crossrefkeywords))
 
         tla.setupTableView(self, self.freekeywords,
                            [u"Palavra-Chave", u"Tipo", u"Thesaurus", u"Data", u"Tipo de Data"],
@@ -137,14 +148,14 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
         self.freekeywords.doubleClicked.connect(self.handleDoubleClick)
         self.freekeywords.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        for btn in self.findChildren(QPushButton, qcore.QRegExp('btn_*')):
+        for btn in self.findChildren(QPushButton, QRegExp('btn_*')):
             if '_add_' in btn.objectName():
                 btn.setIcon(QIcon(':/resourcesFolder/icons/plus_icon.svg'))
                 btn.setText('')
             elif '_del_' in btn.objectName():
                 btn.setIcon(QIcon(':/resourcesFolder/icons/delete_icon.svg'))
                 btn.setText('')
-        for info in self.findChildren(QPushButton, qcore.QRegExp('info_*')):
+        for info in self.findChildren(QPushButton, QRegExp('info_*')):
             info.setIcon(QIcon(':/resourcesFolder/icons/help_icon.svg'))
             info.setText('')
             info.pressed.connect(self.printHelp)
@@ -174,7 +185,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
 
         self.snimar_keywords_special_validation()
         self.scope = scope
-        if self.scope == SCOPES.SERVICES:
+        if self.scope == Scopes.SERVICES:
             self.widget_topic.setHidden(True)
             self.topiccategory.setHidden(True)
             self.combo_topiccategory.setHidden(True)
@@ -209,7 +220,6 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
             tla.setupMandatoryField(self, self.inspire, self.label_inspire,
                                     u"Obrigatório conter pelo menos uma entrada")
 
-    @qcore.pyqtSlot()
     def printHelp(self):
         QToolTip.showText(QCursor.pos(),
                           tla.formatTooltip(self.superParent.helps['keywordsPanel'][self.sender().objectName()]), None)
@@ -217,25 +227,25 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
     def snimar_keywords_special_validation(self):
         positives = 0
 
-        for sn_type in cons.SNIMAR_KEYWORDS_MANDATORY_TYPES:
+        for sn_type in SNIMAR_KEYWORDS_MANDATORY_TYPES:
             if self.snimarkeywords.model().contains_at_column(self.combo_items_md_keywordtypecode_snimar.get(sn_type),
                                                               0):
                 positives += 1
             else:
                 break
-        if positives == len(cons.SNIMAR_KEYWORDS_MANDATORY_TYPES) and self.label_snimarkeywords.toolTip() != u'':
+        if positives == len(SNIMAR_KEYWORDS_MANDATORY_TYPES) and self.label_snimarkeywords.toolTip() != u'':
             label_text = unsetLabelRed(self.label_snimarkeywords.text().replace(u'\u26a0', '')).strip()
             self.label_snimarkeywords.setText(label_text)
             self.label_snimarkeywords.setToolTip(u'')
             self.superParent.unregister_mandatory_missingfield(self.objectName(),
                                                                unsetLabelRed(self.label_snimarkeywords.text()))
-        elif positives != len(cons.SNIMAR_KEYWORDS_MANDATORY_TYPES) and self.label_snimarkeywords.toolTip() == u'':
+        elif positives != len(SNIMAR_KEYWORDS_MANDATORY_TYPES) and self.label_snimarkeywords.toolTip() == u'':
             label_text = setLabelRed(self.label_snimarkeywords.text() + u' ' + u'\u26a0')
             self.label_snimarkeywords.setText(label_text)
             self.label_snimarkeywords.setToolTip(
                 tla.formatTooltip(
                     u"O Metadado tem que conter pelo menos uma palavra chave SNIMar dos seguintes tipos: " +
-                    ', '.join(cons.SNIMAR_KEYWORDS_MANDATORY_TYPES) + u'.'))
+                    ', '.join(SNIMAR_KEYWORDS_MANDATORY_TYPES) + u'.'))
             self.superParent.register_mandatory_missingfield(self.objectName(),
                                                              unsetLabelRed(self.label_snimarkeywords.text()))
 
@@ -269,7 +279,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
     def set_data(self, md):
         if md is None:
             return False
-        if self.scope != SCOPES.SERVICES:
+        if self.scope != Scopes.SERVICES:
             if md.identification is None:
                 return
             for topic in md.identification.topiccategory:
@@ -288,7 +298,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
             return
         for keyword in common.keywords:
             for word in keyword.keywords:
-                if keyword.is_inspire() and self.scope != SCOPES.SERVICES:
+                if keyword.is_inspire() and self.scope != Scopes.SERVICES:
                     if self.combo_items_inspire.get(word, None) is not None:
                         self.inspire.model().addNewRow(self.combo_items_inspire[word])
                     elif customCombo.reverse_en_to_pt_keys(self.combo_items_inspire).get(word, None) is not None:
@@ -296,7 +306,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
                             customCombo.reverse_en_to_pt_keys(self.combo_items_inspire)[word])
                     else:
                         self.inspire.model().addNewRow(customCombo.CodeListItem(word, word, word))
-                elif keyword.is_serviceClassification() and self.scope == SCOPES.SERVICES:
+                elif keyword.is_serviceClassification() and self.scope == Scopes.SERVICES:
                     if self.combo_items_serviceClassification.get(word, None) is not None:
                         self.serviceClassification.model().addNewRow(self.combo_items_serviceClassification[word])
                     elif customCombo.reverse_en_to_pt_keys(self.combo_items_serviceClassification).get(word,
@@ -345,7 +355,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
                     row = [word] + [type_]
                     if keyword.thesaurus is not None:
                         row.append(keyword.thesaurus['title'])
-                        date = qcore.QDate.fromString(keyword.thesaurus['date'], cons.DATE_FORMAT)
+                        date = QDate.fromString(keyword.thesaurus['date'], DATE_FORMAT)
                         row.append(date)
                         if self.combo_items_datetype.get(keyword.thesaurus['datetype']) is None:
                             kw_type = None
@@ -357,7 +367,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
                     self.freekeywords.model().addNewRow(row)
 
     def get_data(self, md):
-        if self.scope != SCOPES.SERVICES:
+        if self.scope != Scopes.SERVICES:
             md.identification.topiccategory = self.topiccategory.model().get_all_items()
             # Write the INSPIRE keywords
             inspire_keywords = snimarProfileModel.MD_Keywords()
@@ -394,7 +404,7 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
                     datety = self.combo_items_datetype[row[4].term]
                 keyword.thesaurus = {
                     'title': row[2],
-                    'date': row[3].toString(cons.DATE_FORMAT),
+                    'date': row[3].toString(DATE_FORMAT),
                     'datetype': datety
                 }
             common.keywords.append(keyword)
@@ -429,7 +439,6 @@ class KeywordsWidget(QWidget, keywordsPanel.Ui_keywords):
             }
             common.keywords.append(keyword)
 
-    @qcore.pyqtSlot(qcore.QModelIndex)
     def handleDoubleClick(self, index):
         if self.sender() == self.freekeywords:
             tla.callDialogAndEdit(self.sender(), FreeKeyWordsDialog, index,

@@ -33,8 +33,18 @@ from qgis.PyQt.QtGui import QFont, QColor, QIcon
 from qgis.PyQt.QtWidgets import QWidget, QListWidget, QPushButton, QGridLayout, QListWidgetItem, QStackedWidget
 from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
 import EditorMetadadosMarswInforbiomares.CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares import snimarEditorController
+#from EditorMetadadosMarswInforbiomares import snimarEditorController
 from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
+
+from inspire_metadata_editor.snimarEditorController.identification import IdentificationWidget
+from inspire_metadata_editor.snimarEditorController.keywords import KeywordsWidget
+from inspire_metadata_editor.snimarEditorController.serviceOperations import ServiceOperationsWidget
+from inspire_metadata_editor.snimarEditorController.geographicInfo import GeographicInfoWidget
+from inspire_metadata_editor.snimarEditorController.temporalInfo import TemporalInfoWidget
+from inspire_metadata_editor.snimarEditorController.quality import QualityWidget
+from inspire_metadata_editor.snimarEditorController.restrictions import RestrictionsWidget
+from inspire_metadata_editor.snimarEditorController.distribution import DistributionWidget
+from inspire_metadata_editor.snimarEditorController.metadata import MetadataWidget
 
 
 class MetadadoSNIMar(QWidget):
@@ -96,24 +106,24 @@ class MetadadoSNIMar(QWidget):
         tab_list = []
 
         # Setup snimarEditorController
-        self.identification = snimarEditorController.IdentificationWidget(self, self.scope)
+        self.identification = IdentificationWidget(self, self.scope)
         tab_list.append(self.identification)
         if self.scope == SCOPES.SERVICES:
-            self.operations = snimarEditorController.ServiceOperationsWidget(self)
+            self.operations = ServiceOperationsWidget(self)
             tab_list.append(self.operations)
-        self.keywords = snimarEditorController.KeywordsWidget(self, self.scope)
+        self.keywords = KeywordsWidget(self, self.scope)
         tab_list.append(self.keywords)
-        self.geographicinfo = snimarEditorController.GeographicInfoWidget(self, self.scope)
+        self.geographicinfo = GeographicInfoWidget(self, self.scope)
         tab_list.append(self.geographicinfo)
-        self.temporalinfo = snimarEditorController.TemporalInfoWidget(self, self.scope)
+        self.temporalinfo = TemporalInfoWidget(self, self.scope)
         tab_list.append(self.temporalinfo)
-        self.quality = snimarEditorController.QualityWidget(self,self.scope)
+        self.quality = QualityWidget(self,self.scope)
         tab_list.append(self.quality)
-        self.restrictions = snimarEditorController.RestrictionsWidget(self, self.scope)
+        self.restrictions = RestrictionsWidget(self, self.scope)
         tab_list.append(self.restrictions)
-        self.distribution = snimarEditorController.DistributionWidget(self, self.scope)
+        self.distribution = DistributionWidget(self, self.scope)
         tab_list.append(self.distribution)
-        self.metadata = snimarEditorController.MetadataWidget(self)
+        self.metadata = MetadataWidget(self)
         tab_list.append(self.metadata)
 
         self.setupUi()

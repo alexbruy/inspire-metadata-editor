@@ -24,13 +24,13 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###############################################################################
-from __future__ import absolute_import
-from .identification import IdentificationWidget
-from .distribution import DistributionWidget
-from .geographicInfo import GeographicInfoWidget
-from .keywords import KeywordsWidget
-from .metadata import MetadataWidget
-from .quality import QualityWidget
-from .restrictions import RestrictionsWidget
-from .temporalInfo import TemporalInfoWidget
-from .serviceOperations import ServiceOperationsWidget
+# ~ from __future__ import absolute_import
+# ~ from .identification import IdentificationWidgetsnimarEditorController
+# ~ from .distribution import DistributionWidget
+# ~ from .geographicInfo import GeographicInfoWidget
+# ~ from .keywords import KeywordsWidget
+# ~ from .metadata import MetadataWidget
+# ~ from .quality import QualityWidget
+# ~ from .restrictions import RestrictionsWidget
+# ~ from .temporalInfo import TemporalInfoWidget
+# ~ from .serviceOperations import ServiceOperationsWidget
