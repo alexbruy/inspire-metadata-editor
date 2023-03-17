@@ -35,7 +35,7 @@ import traceback
 import urllib.request, urllib.error, urllib.parse
 
 from qgis.PyQt import uic
-from qgis.PyQt.QtCore import Qt, QPoint, QUrl, pyqtSlot
+from qgis.PyQt.QtCore import Qt, QPoint, QUrl
 from qgis.PyQt.QtWidgets import QApplication, QPushButton, QHeaderView, QMenu, QAction, QProgressDialog, QProgressBar, QMessageBox, QAbstractItemView, QMainWindow, QWidget, QLineEdit, QTabBar, QFileDialog
 from qgis.PyQt.QtGui import QFont, QKeySequence, QDesktopServices
 
@@ -217,12 +217,10 @@ class EditorWindow(BASE, WIDGET):
         self.menu_single.addAction(self.visualize_action)
         self.mouse_point = None  # dont use this not updated frequentaly only when menucontext is call
 
-    @pyqtSlot(QPoint)
     def menu_context(self, point):
         self.mouse_point = point
         self.menu_single.exec_(self.filetable.viewport().mapToGlobal(point))
 
-    @pyqtSlot(int)
     def tab_close(self, index, remove=False):
         """Slot to handle the closing of a tab."""
         if not remove:
@@ -240,7 +238,6 @@ class EditorWindow(BASE, WIDGET):
                 self.tracked_list.pop(self.filetable.model().matrix[x.row()][2], None)
                 self.filetable.model().removeSpecificRow(x.row())
 
-    @pyqtSlot()
     def new_metadata_xml_tab(self, scope):
         """Slot to create a new tab without loading any XML file."""
         widget = MetadadoSNIMar(self, scope)
@@ -263,7 +260,6 @@ class EditorWindow(BASE, WIDGET):
         self.tab_files.append(filedict)
         self.tmp_file_index += 1
 
-    @pyqtSlot()
     def open_metadata_xml_file(self, name=None):
         """Slot to create a new tab using the data retrieved from a XML file."""
         # Get the filename
@@ -355,7 +351,6 @@ class EditorWindow(BASE, WIDGET):
                          vality_msg(validity), None])
                     self.tracked_list.track_new_file(**filelist)
 
-    @pyqtSlot()
     def save_metadata_xml_file(self, flag):
         if self.tabWidget.currentIndex() == 0:
             return
@@ -498,7 +493,6 @@ class EditorWindow(BASE, WIDGET):
         # Save files list,necessary because of the access before
         self.tracked_list.save()
 
-    @pyqtSlot()
     def start_dir_track(self):
         directory = QFileDialog.getExistingDirectory(self, directory=self.last_open_dir)
         if directory == "":
@@ -557,7 +551,6 @@ class EditorWindow(BASE, WIDGET):
         row_index = curr_select.row()
         status = QDesktopServices.openUrl(QUrl.fromLocalFile(curr_select.model().matrix[row_index][2]))
 
-    @pyqtSlot()
     def open_list_contacts(self):
         self.dialog = contacts_dialog.ContactsDialog(self, edition_mode=True)
         self.dialog.btn_add_contact_metadata.clicked.connect(
@@ -612,7 +605,6 @@ class EditorWindow(BASE, WIDGET):
                 meta = MetadadoSNIMar(self, xml_doc=doc, md=md)
         return meta.is_doc_Snimar_Valid()
 
-    @pyqtSlot()
     def update_validity(self, index):
         filename_index = self.filetable.model().index(index.row(), 2)
         validity_index = self.filetable.model().index(index.row(), 4)
@@ -638,7 +630,6 @@ class EditorWindow(BASE, WIDGET):
         except OSError:
             pass
 
-    @pyqtSlot()
     def launch_update(self):
         # Launch the progress bar dialog
         self.update_dialog = SNIMarThesaurusUpdateDialog(self)
