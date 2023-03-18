@@ -36,7 +36,7 @@ import urllib.request, urllib.error, urllib.parse
 
 from qgis.PyQt import uic
 from qgis.PyQt.QtCore import Qt, QPoint, QUrl
-from qgis.PyQt.QtWidgets import QApplication, QPushButton, QHeaderView, QMenu, QAction, QProgressDialog, QProgressBar, QMessageBox, QAbstractItemView, QMainWindow, QWidget, QLineEdit, QTabBar, QFileDialog
+from qgis.PyQt.QtWidgets import QApplication, QPushButton, QHeaderView, QMenu, QAction, QProgressDialog, QProgressBar, QMessageBox, QAbstractItemView, QMainWindow, QWidget, QLineEdit, QTabBar, QFileDialog, QDialog
 from qgis.PyQt.QtGui import QFont, QKeySequence, QDesktopServices
 
 #from inspire_metadata_editor.snimarEditorController.dialogs.about import About
@@ -51,6 +51,7 @@ from inspire_metadata_editor.snimarProfileModel import snimarProfileModel, valid
 from inspire_metadata_editor.snimarEditorController.dialogs import contacts_dialog
 from inspire_metadata_editor.snimarEditorController.models.delegates import ButtonDelegate
 
+from inspire_metadata_editor.gui.select_layer_dialog import SelectLayerDialog
 from inspire_metadata_editor.gui.about_dialog import AboutDialog
 
 from inspire_metadata_editor.constants import PLUGIN_ROOT, SNIMAR_THESAURUS_META, CODELIST_SERVER_URL, SNIMAR_BASE_DIR, Scopes
@@ -240,7 +241,14 @@ class EditorWindow(BASE, WIDGET):
 
     def new_metadata_xml_tab(self, scope):
         """Slot to create a new tab without loading any XML file."""
-        widget = MetadadoSNIMar(self, scope)
+        # select layer from project layers.
+        # this layer will be used to pre-populate metadata if possible.
+        layer = None
+        dlg = SelectLayerDialog(self)
+        if dlg.exec_() == QDialog.Accepted:
+            layer = dlg.layer()
+
+        widget = MetadadoSNIMar(self, scope, layer=layer)
         new_tmp_name = self.tr('Novo Ficheiro')
         if self.tmp_file_index > 0:
             new_tmp_name += '(' + str(self.tmp_file_index) + ')'

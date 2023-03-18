@@ -49,7 +49,7 @@ from inspire_metadata_editor.constants import PLUGIN_ROOT, TABLIST_SERVICES, TAB
 
 
 class MetadadoSNIMar(QWidget):
-    def __init__(self, parent, scope=None, xml_doc=None, md=None):
+    def __init__(self, parent, scope=None, xml_doc=None, md=None, layer=None):
         super(MetadadoSNIMar, self).__init__(parent)
         if scope is None:
             self.scope = Scopes.get_code_representation(md.hierarchy)
@@ -140,6 +140,10 @@ class MetadadoSNIMar(QWidget):
             self.restrictions.set_data(self.md)
             self.quality.set_data(self.md)
             self.geographicinfo.set_data(self.md)
+
+        # TODO: populate metadata from layer
+        if layer if not None:
+            pass
 
     def setupUi(self):
         self.widgetstack.addWidget(self.identification)
