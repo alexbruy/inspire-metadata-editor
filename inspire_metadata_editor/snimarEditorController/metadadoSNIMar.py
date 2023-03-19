@@ -142,8 +142,8 @@ class MetadadoSNIMar(QWidget):
             self.geographicinfo.set_data(self.md)
 
         # TODO: populate metadata from layer
-        if layer if not None:
-            pass
+        if layer is not None:
+            self.sync_with_layer(layer)
 
     def setupUi(self):
         self.widgetstack.addWidget(self.identification)
@@ -247,6 +247,9 @@ class MetadadoSNIMar(QWidget):
                          "A validade do conteúdo é da\n"
                          "inteira responsabilidade\n"
                          "do utilizador.")
+
+    def sync_with_layer(self, layer):
+        pass
 
 
 def vality_msg(validity):
