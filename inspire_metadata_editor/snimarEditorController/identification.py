@@ -46,7 +46,7 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_
     setLabelRed
 from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
     identificationPanel
-
+from inspire_metadata_editor import resources
 
 class IdentificationWidget(QWidget, identificationPanel.Ui_identification):
     """

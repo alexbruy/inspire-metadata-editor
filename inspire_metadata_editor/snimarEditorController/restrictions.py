@@ -39,7 +39,7 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import tabl
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import listRowsValidation as lval
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
 from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
-
+from inspire_metadata_editor import resources
 
 class RestrictionsWidget(QWidget, restrictionsPanel.Ui_restrictions):
     def __init__(self, parent, scope):

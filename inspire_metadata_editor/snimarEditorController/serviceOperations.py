@@ -31,7 +31,7 @@ from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSour
 from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.service_operation_inline import InlineServiceOperation
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed
-
+from inspire_metadata_editor import resources
 
 class ServiceOperationsWidget(QWidget, serviceOperationsPanel.Ui_operations):
     def __init__(self, parent):

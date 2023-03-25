@@ -47,6 +47,7 @@ from inspire_metadata_editor.snimarEditorController.metadata import MetadataWidg
 
 from inspire_metadata_editor.constants import PLUGIN_ROOT, TABLIST_SERVICES, TABLIST_CDG_SERIES, ERROR_COLOR, Scopes
 
+from inspire_metadata_editor import resources
 
 class MetadadoSNIMar(QWidget):
     def __init__(self, parent, scope=None, xml_doc=None, md=None, layer=None):

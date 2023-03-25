@@ -45,6 +45,7 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import tabl
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
 from EditorMetadadosMarswInforbiomares import CONSTANTS as CONS
+from inspire_metadata_editor import resources
 
 regex_pt = re.compile('^ *dados? *hist.ricos? *(?:marinhos?)? *(?:recuperados?)? *\.? *\n?',
                       re.IGNORECASE)

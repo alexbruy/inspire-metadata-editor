@@ -42,6 +42,7 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import cust
 from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper, NullQDateTimeEditWrapper
 from EditorMetadadosMarswInforbiomares.snimarProfileModel.snimarProfileModel import EX_TemporalExtent
+from inspire_metadata_editor import resources
 
 
 class TemporalInfoWidget(QWidget, temporalInformationPanel.Ui_temporal):

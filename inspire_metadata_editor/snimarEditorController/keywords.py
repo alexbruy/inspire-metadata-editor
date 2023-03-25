@@ -52,6 +52,7 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import Tabl
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed, setLabelRed
 
 from inspire_metadata_editor.constants import PLUGIN_ROOT, SNIMAR_KEYWORDS_MANDATORY_TYPES, DATE_FORMAT, Scopes
+from inspire_metadata_editor import resources
 
 WIDGET, BASE = uic.loadUiType(os.path.join(PLUGIN_ROOT, "ui", "keywords_widget.ui"))
 

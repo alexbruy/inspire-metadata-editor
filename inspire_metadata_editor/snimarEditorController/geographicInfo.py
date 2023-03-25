@@ -52,6 +52,8 @@ from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import listRowsValidation as lval
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
 
+from inspire_metadata_editor import resources
+
 NO_VALUE = -999999999.0000
 
 

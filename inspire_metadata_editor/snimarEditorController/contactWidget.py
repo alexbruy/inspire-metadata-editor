@@ -46,6 +46,8 @@ from EditorMetadadosMarswInforbiomares.snimarEditorController.models import list
 
 from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
 
+from inspire_metadata_editor import resources
+
 CONTACTFILE = os.path.join(os.path.join(os.path.abspath(os.path.expanduser('~')), '.snimar'), 'contact_list.json')
 validator = lval.InlineContact()
 OUTRA = "Outra - Especificar Abaixo"

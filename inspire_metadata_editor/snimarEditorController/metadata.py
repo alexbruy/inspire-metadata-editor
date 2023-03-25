@@ -42,7 +42,7 @@ from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileMo
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed
 from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
 from  EditorMetadadosMarswInforbiomares.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
-
+from inspire_metadata_editor import resources
 
 class MetadataWidget(QWidget, metadataPanel.Ui_metadata):
     def __init__(self, parent):
