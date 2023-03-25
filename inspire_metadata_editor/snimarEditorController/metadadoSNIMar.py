@@ -250,7 +250,18 @@ class MetadadoSNIMar(QWidget):
                          "do utilizador.")
 
     def sync_with_layer(self, layer):
-        pass
+        if layer is None:
+            return
+
+        extent = layer.extent()
+
+        row = [str(extent.xMinimum()).replace(".", ","),
+               str(extent.xMaximum()).replace(".", ","),
+               str(extent.yMaximum()).replace(".", ","),
+               str(extent.yMinimum()).replace(".", ","),
+               True]
+
+        self.geographicinfo.boundingbox.model().addNewRow(row)
 
 
 def vality_msg(validity):
