@@ -335,15 +335,15 @@ class KeywordsWidget(BASE, WIDGET):
                         [type_, word, thesaurus['version'], thesaurus, keyword.cc_uuid])
                     self.snimar_keywords_special_validation()
 
-                elif keyword.is_worms():
-                    self.wormskeywords.model().addNewRow(
-                        [word, keyword.thesaurus['date']]
-                    )
+                # ~ elif keyword.is_worms():
+                    # ~ self.wormskeywords.model().addNewRow(
+                        # ~ [word, keyword.thesaurus['date']]
+                    # ~ )
 
-                elif keyword.is_crossref():
-                    self.crossrefkeywords.model().addNewRow(
-                        [word, keyword.thesaurus['title'].split('doi:')[-1], keyword.thesaurus['date']]
-                    )
+                # ~ elif keyword.is_crossref():
+                    # ~ self.crossrefkeywords.model().addNewRow(
+                        # ~ [word, keyword.thesaurus['title'].split('doi:')[-1], keyword.thesaurus['date']]
+                    # ~ )
 
                 else:
                     if customCombo.reverse_pt_to_en_keys(self.combo_items_md_keywordtypecode).get(keyword.type) is None:
@@ -420,25 +420,25 @@ class KeywordsWidget(BASE, WIDGET):
                                        '#MD_KeywordTypeCode_snimar'
             common.keywords.append(keyword)
 
-        for row in self.wormskeywords.model().matrix:
-            keyword = snimarProfileModel.MD_Keywords()
-            keyword.keywords.append(row[0])
-            keyword.thesaurus = {
-                'title': 'https://www.marinespecies.org/rest/',
-                'date': row[1],
-                'datetype': self.combo_items_datetype['revision'],
-            }
-            common.keywords.append(keyword)
+        # ~ for row in self.wormskeywords.model().matrix:
+            # ~ keyword = snimarProfileModel.MD_Keywords()
+            # ~ keyword.keywords.append(row[0])
+            # ~ keyword.thesaurus = {
+                # ~ 'title': 'https://www.marinespecies.org/rest/',
+                # ~ 'date': row[1],
+                # ~ 'datetype': self.combo_items_datetype['revision'],
+            # ~ }
+            # ~ common.keywords.append(keyword)
 
-        for row in self.crossrefkeywords.model().matrix:
-            keyword = snimarProfileModel.MD_Keywords()
-            keyword.keywords.append(row[0])
-            keyword.thesaurus = {
-                'title': 'https://api.crossref.org/works?filter=doi:{}'.format(row[1]),
-                'date': row[2],
-                'datetype': self.combo_items_datetype['revision'],
-            }
-            common.keywords.append(keyword)
+        # ~ for row in self.crossrefkeywords.model().matrix:
+            # ~ keyword = snimarProfileModel.MD_Keywords()
+            # ~ keyword.keywords.append(row[0])
+            # ~ keyword.thesaurus = {
+                # ~ 'title': 'https://api.crossref.org/works?filter=doi:{}'.format(row[1]),
+                # ~ 'date': row[2],
+                # ~ 'datetype': self.combo_items_datetype['revision'],
+            # ~ }
+            # ~ common.keywords.append(keyword)
 
     def handleDoubleClick(self, index):
         if self.sender() == self.freekeywords:
