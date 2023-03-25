@@ -114,7 +114,7 @@ class EditorWindow(BASE, WIDGET):
         self.menu_save_all.triggered.connect(self.save_all_open)
         self.menu_add_dir.triggered.connect(self.start_dir_track)
         self.menu_close.triggered.connect(self.close_editor)
-        self.menu_codelists.triggered.connect(self.refresh_codelist)
+        #self.menu_codelists.triggered.connect(self.refresh_codelist)
         self.menu_resave.triggered.connect(self.resave_all_in_list)
 
         contact_list = self.menubar.addAction(self.tr("Lista de Contactos"))
