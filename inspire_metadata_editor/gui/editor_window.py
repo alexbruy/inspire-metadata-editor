@@ -366,18 +366,24 @@ class EditorWindow(BASE, WIDGET):
         # Load filename where to save
         filedict = None
         but_saveas = False
+        layer = None
 
         # if the name of the file is Novo Ficheiro, or the file is not in the
         # tracking system, launch a save as
         if flag == SAVE_FLAG:
             name = self.tabWidget.currentWidget().objectName()
+            layer = self.tabWidget.currentWidget().layer
             if name not in self.tracked_list:
                 but_saveas = True
 
         if flag == SAVEAS_FLAG or but_saveas:
+            dir_name = self.last_open_dir
+            if layer is not None:
+                dir_name = os.path.join(self.last_open_dir, f"{layer.name()}.xml")
+
             # Open the Save As dialog and get the filename for the new XML document. Then,
             # convert the filename to unicode.
-            doc_ = QFileDialog.getSaveFileName(self, self.tr('Guardar ficheiro XML'), self.last_open_dir,
+            doc_ = QFileDialog.getSaveFileName(self, self.tr('Guardar ficheiro XML'), dir_name,
                                                     self.tr("XML files (*.xml);;All Files (*.*)"))[0]
 
             if doc_.strip() == "":

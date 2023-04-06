@@ -143,7 +143,9 @@ class MetadadoSNIMar(QWidget):
             self.geographicinfo.set_data(self.md)
 
         # TODO: populate metadata from layer
+        self.layer = None
         if layer is not None:
+            self.layer = layer
             self.sync_with_layer(layer)
 
     def setupUi(self):
