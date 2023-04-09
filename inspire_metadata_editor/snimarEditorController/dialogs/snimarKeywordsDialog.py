@@ -31,9 +31,9 @@ from qgis.PyQt.QtCore import Qt, QModelIndex
 from qgis.PyQt.QtGui import QStandardItem, QStandardItemModel, QFont
 from qgis.PyQt.QtWidgets import QAbstractItemView, QSizePolicy, QLabel, QDialog
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import addSnimarKeyWordsDialog
-from EditorMetadadosMarswInforbiomares.snimarProfileModel.snimarThesaurusBuilder import SnimarThesurusModel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import addSnimarKeyWordsDialog
+from inspire_metadata_editor.snimarProfileModel.snimarThesaurusBuilder import SnimarThesurusModel
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
 
 
 class SNIMARKeywordsDialog(QDialog, addSnimarKeyWordsDialog.Ui_Dialog):

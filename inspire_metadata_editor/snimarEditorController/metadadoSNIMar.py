@@ -33,7 +33,7 @@ from qgis.PyQt.QtCore import Qt, QSize
 from qgis.PyQt.QtGui import QFont, QColor, QIcon
 from qgis.PyQt.QtWidgets import QWidget, QListWidget, QPushButton, QGridLayout, QListWidgetItem, QStackedWidget
 
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
 
 from inspire_metadata_editor.snimarEditorController.identification import IdentificationWidget
 from inspire_metadata_editor.snimarEditorController.keywords import KeywordsWidget

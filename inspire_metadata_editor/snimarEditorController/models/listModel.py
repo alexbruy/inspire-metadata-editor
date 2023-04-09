@@ -29,8 +29,8 @@ from qgis.PyQt.QtCore import QModelIndex, Qt, QSize, QAbstractListModel
 from qgis.PyQt.QtWidgets import QDateEdit, QDoubleSpinBox, QLineEdit, QComboBox, QSpinBox, QCheckBox, QLabel, QDateTimeEdit
 from qgis.PyQt.QtGui import QColor
 from qgis.gui import QgsFilterLineEdit
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CustomComboBox
+from inspire_metadata_editor.constants import DATE_FORMAT, ERROR_COLOR
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CustomComboBox
 
 
 class ListModel(QAbstractListModel):
@@ -75,7 +75,7 @@ class ListModel(QAbstractListModel):
             if self.listElements[index.row()] is None:
                 return None
             else:
-                return self.listElements[index.row()].toString(cons.DATE_FORMAT)
+                return self.listElements[index.row()].toString(DATE_FORMAT)
         elif role == Qt.EditRole:
             return self.listElements[index.row()]
         elif role == Qt.SizeHintRole and self.elementType in adjust_size_types:
@@ -89,7 +89,7 @@ class ListModel(QAbstractListModel):
             if self.valList[index.row()][0]:
                 return None
             else:
-                return QColor(cons.ERROR_COLOR)
+                return QColor(ERROR_COLOR)
         elif role == Qt.ToolTipRole:
             if self.valList[index.row()][0]:
                 if self.elementType == CustomComboBox:

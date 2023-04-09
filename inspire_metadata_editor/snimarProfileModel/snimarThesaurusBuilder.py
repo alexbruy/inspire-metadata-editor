@@ -30,24 +30,24 @@ import os
 import textwrap
 from qgis.PyQt.QtCore import QDate, QSize
 from qgis.PyQt.QtGui import QStandardItemModel, QStandardItem
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from EditorMetadadosMarswInforbiomares import CONSTANTS
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.constants import SNIMAR_THESAURUS_META, SNIMAR_BASE_DIR
 
 
 class SnimarThesurusModel(object):
     def __init__(self, stable=False):
-        with open(CONSTANTS.SNIMAR_THESAURUS_META) as json_data:
+        with open(SNIMAR_THESAURUS_META) as json_data:
             src_json = json.load(json_data)
             version = src_json['current_version']
 
         if stable:
-            with open(os.path.join(CONSTANTS.SNIMAR_BASE_DIR,
+            with open(os.path.join(SNIMAR_BASE_DIR,
                                    "resourcesFolder/CodeLists/SnimarkeyWords/snimarThesaurus" + version + ".json")) as json_data:
                 src_json = json.load(json_data)
                 self.model_root = SnimarThesaurus(u"Thesaurus SNIMar", src_json[u'stable_version'],
                                                   src_json[u'last_update'].split('T')[0])
         else:
-            with open(os.path.join(CONSTANTS.SNIMAR_BASE_DIR, "resourcesFolder/CodeLists/SnimarkeyWords/snimarThesaurus" + ".json")) as json_data:
+            with open(os.path.join(SNIMAR_BASE_DIR, "resourcesFolder/CodeLists/SnimarkeyWords/snimarThesaurus" + ".json")) as json_data:
                 src_json = json.load(json_data)
                 self.model_root = SnimarThesaurus(u"Thesaurus SNIMar", src_json[u'version'], src_json[u'last_update'].split('T')[0])
 

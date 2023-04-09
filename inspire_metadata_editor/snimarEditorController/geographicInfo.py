@@ -33,24 +33,24 @@ from qgis.PyQt.QtCore import QModelIndex, Qt
 from qgis.PyQt.QtGui import QCursor
 from qgis.PyQt.QtWidgets import QToolTip, QDateTimeEdit, QWidget
 
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.extent_dialog import ExtentDialog
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CodeListItem, \
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.dialogs.extent_dialog import ExtentDialog
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CodeListItem, \
     CustomComboBox, Reference_System_Item
 
 # UI generated python modules
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
     geographicinformationPanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.geo_localization_dialog import \
+from inspire_metadata_editor.snimarEditorController.dialogs.geo_localization_dialog import \
     GeoLocalizationDialog
 from qgis.gui import QgsFilterLineEdit
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import setLabelRed, \
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor.snimarEditorController.models.table_list_aux import setLabelRed, \
     unsetLabelRed
-from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import listRowsValidation as lval
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.constants import Scopes as SCOPES
+from inspire_metadata_editor.snimarEditorController.models import listRowsValidation as lval
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
 
 from inspire_metadata_editor import resources
 

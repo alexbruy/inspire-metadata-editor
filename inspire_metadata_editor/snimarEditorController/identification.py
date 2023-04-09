@@ -35,16 +35,16 @@ from qgis.PyQt.QtWidgets import QToolTip, QDateTimeEdit, QWidget, QHeaderView, Q
 from qgis.PyQt.QtGui import QCursor, QIcon
 from qgis._gui import QgsFilterLineEdit
 
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
-from EditorMetadadosMarswInforbiomares.snimarEditorController import contactWidget
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import listRowsValidation as lval
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import tablesRowsValidation as tval
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed, \
+from inspire_metadata_editor.constants import PREDEF_LANG_RESOURCES, PREDEF_CHARSET
+from inspire_metadata_editor.constants import Scopes as SCOPES
+from inspire_metadata_editor.snimarEditorController import contactWidget
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.snimarEditorController.models import listRowsValidation as lval
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models import tablesRowsValidation as tval
+from inspire_metadata_editor.snimarEditorController.models.table_list_aux import unsetLabelRed, \
     setLabelRed
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
     identificationPanel
 from inspire_metadata_editor import resources
 
@@ -105,7 +105,7 @@ class IdentificationWidget(QWidget, identificationPanel.Ui_identification):
                           validationfunction=self.validator.resourcestatus)
 
         self.combo_language.setCurrentIndex(
-            self.combo_language.findText(cons.PREDEF_LANG_RESOURCES))
+            self.combo_language.findText(PREDEF_LANG_RESOURCES))
         # ---------
 
         # tables
@@ -141,7 +141,7 @@ class IdentificationWidget(QWidget, identificationPanel.Ui_identification):
         self.characterset.setModel(
             customCombo.CustomComboBoxModel(self, [None] + sorted(
                 list(self.combo_items_md_charactersetCode.values()), key=lambda x: x.term_pt)))
-        self.characterset.setCurrentIndex(self.characterset.findText(cons.PREDEF_CHARSET))
+        self.characterset.setCurrentIndex(self.characterset.findText(PREDEF_CHARSET))
         self.hierarchylevel.setModel(
             customCombo.CustomComboBoxModel(self,
                                             [None] + sorted(list(self.combo_items_md_scopecode.values()),
@@ -280,7 +280,7 @@ class IdentificationWidget(QWidget, identificationPanel.Ui_identification):
 
                 if self.combo_items_md_charactersetCode.get(md.identification.charset) is None:
                     self.characterset.setCurrentIndex(
-                        self.characterset.findText(cons.PREDEF_CHARSET))
+                        self.characterset.findText(PREDEF_CHARSET))
                 else:
                     self.characterset.setCurrentIndex(
                         self.characterset.findText(self.combo_items_md_charactersetCode.get(

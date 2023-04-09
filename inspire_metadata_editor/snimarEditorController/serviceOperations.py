@@ -27,10 +27,10 @@
 from qgis.PyQt.QtCore import Qt, QRegExp
 from qgis.PyQt.QtWidgets import QWidget, QLabel, QPushButton, QToolTip
 from qgis.PyQt.QtGui import QIcon, QCursor
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import serviceOperationsPanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs.service_operation_inline import InlineServiceOperation
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import serviceOperationsPanel
+from inspire_metadata_editor.snimarEditorController.dialogs.service_operation_inline import InlineServiceOperation
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models.table_list_aux import unsetLabelRed
 from inspire_metadata_editor import resources
 
 class ServiceOperationsWidget(QWidget, serviceOperationsPanel.Ui_operations):

@@ -8,9 +8,9 @@ from qgis.PyQt import QtNetwork
 
 from qgis.PyQt.QtWidgets import QAbstractItemView, QSizePolicy, QLabel, QDialog
 
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import TableModel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import wormsDialog
+from inspire_metadata_editor.snimarEditorController.models import TableModel
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import wormsDialog
 
 
 class WormsKeywordsDialog(QtWidgets.QDialog, wormsDialog.Ui_worms_dialog):

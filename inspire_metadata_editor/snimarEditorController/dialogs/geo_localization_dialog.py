@@ -29,11 +29,11 @@ import platform
 from qgis.PyQt.QtCore import QRegExp
 from qgis.PyQt.QtWidgets import QDialog, QToolTip
 from qgis.PyQt.QtGui import QCursor, QFont
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import chooseExtentGeographicInformationDialog
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import chooseExtentGeographicInformationDialog
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
 from qgis.PyQt import QtGui as qgui
 from qgis.PyQt import QtWidgets as qwidgets
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import geographicinformationPanel
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import geographicinformationPanel
 
 
 class GeoLocalizationDialog(QDialog, chooseExtentGeographicInformationDialog.Ui_Dialog):

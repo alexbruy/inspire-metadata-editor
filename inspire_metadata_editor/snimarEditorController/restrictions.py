@@ -34,11 +34,11 @@ from qgis.PyQt.QtWidgets import QToolTip, QDateTimeEdit, QWidget
 from qgis.PyQt.QtGui import QCursor
 from qgis._gui import QgsFilterLineEdit
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import restrictionsPanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import listRowsValidation as lval
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import restrictionsPanel
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models import listRowsValidation as lval
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.constants import Scopes as SCOPES
 from inspire_metadata_editor import resources
 
 class RestrictionsWidget(QWidget, restrictionsPanel.Ui_restrictions):

@@ -34,17 +34,16 @@ from qgis.PyQt.QtGui import QCursor
 from qgis._gui import QgsFilterLineEdit
 import re
 
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
 
 # UI generated python modules
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import qualityPanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import tablesRowsValidation as tval
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
-from EditorMetadadosMarswInforbiomares import CONSTANTS as CONS
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import qualityPanel
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor import constants as cons
+from inspire_metadata_editor.snimarEditorController.models import tablesRowsValidation as tval
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
 from inspire_metadata_editor import resources
 
 regex_pt = re.compile('^ *dados? *hist.ricos? *(?:marinhos?)? *(?:recuperados?)? *\.? *\n?',

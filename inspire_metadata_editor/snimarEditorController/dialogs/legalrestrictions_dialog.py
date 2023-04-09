@@ -31,11 +31,11 @@ import platform
 from qgis.PyQt.QtWidgets import QToolTip, QDialog
 from qgis.PyQt.QtGui import QCursor, QFont
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import chooseLegalRestrictionDialog
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CustomComboBoxModel
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import restrictionsPanel
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import chooseLegalRestrictionDialog
+from inspire_metadata_editor import constants as cons
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CustomComboBoxModel
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import restrictionsPanel
 
 
 class LegalRestrictionsDialog(QDialog, chooseLegalRestrictionDialog.Ui_Dialog):

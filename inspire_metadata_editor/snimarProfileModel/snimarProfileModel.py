@@ -33,12 +33,12 @@ import re
 import datetime
 
 # OWSLib imports
-import EditorMetadadosMarswInforbiomares
-from EditorMetadadosMarswInforbiomares.libs.owslib import iso
-from EditorMetadadosMarswInforbiomares.libs.owslib import util
-from EditorMetadadosMarswInforbiomares.libs.owslib import namespaces
-from EditorMetadadosMarswInforbiomares.CONSTANTS import Scopes as SCOPES
-from EditorMetadadosMarswInforbiomares.CONSTANTS import SNIMAR_BASE_DIR
+import inspire_metadata_editor
+from inspire_metadata_editor.libs.owslib import iso
+from inspire_metadata_editor.libs.owslib import util
+from inspire_metadata_editor.libs.owslib import namespaces
+from inspire_metadata_editor.constants import Scopes as SCOPES
+from inspire_metadata_editor.constants import SNIMAR_BASE_DIR
 
 from jinja2 import Environment, FileSystemLoader
 

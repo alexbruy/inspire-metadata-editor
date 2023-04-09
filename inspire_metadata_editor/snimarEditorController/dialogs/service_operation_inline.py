@@ -29,10 +29,10 @@ from qgis.PyQt.QtCore import QRegExp, Qt
 from qgis.PyQt.QtWidgets import QWidget, QPushButton, QToolTip, QComboBox, QMessageBox, QDateTimeEdit
 from qgis.PyQt.QtGui import QCursor, QIcon, QPalette, QFont
 from qgis._gui import QgsFilterLineEdit
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import operationInlinePanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CustomComboBox
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import operationInlinePanel
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CustomComboBox
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
 
 
 class InlineServiceOperation(QWidget, operationInlinePanel.Ui_operations):

@@ -35,10 +35,10 @@ from qgis.PyQt.QtCore import QMetaObject, Qt, QRegExp
 from qgis.PyQt.QtWidgets import QWidget, QToolTip, QDateTimeEdit, QDialog, QPushButton, QComboBox, QMessageBox, QListWidget, QLineEdit, QListWidgetItem
 from qgis.PyQt.QtGui import QCursor, QFont, QIcon
 
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as cus
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as cus
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import contactListManagerWindow
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import contactListManagerWindow
 
 from inspire_metadata_editor.gui.add_organization_dialog import AddOrganizationDialog
 from inspire_metadata_editor.constants import PLUGIN_ROOT
@@ -130,6 +130,8 @@ class ContactsDialog(WIDGET, BASE):
             self.contact_list.itemClicked.connect(self.selection_changed)  # change current selection if changes exists ask...
 
             self.btn_add_organization.clicked.connect(self.add_new_organization)
+            self.btn_remove_organization.setIcon(QIcon(os.path.join(PLUGIN_ROOT, "resourcesFolder", "icons", "delete_icon.svg")))
+            self.btn_remove_organization.clicked.connect(self.remove_organization)
         else:  # EXPORT MODE
             self.contactPanel.hide()
             self.btn_add_contact_metadata.setVisible(True)
@@ -422,6 +424,25 @@ class ContactsDialog(WIDGET, BASE):
                 json.dump(self.superParent.orgs, f)
 
             self.populate_organizations()
+
+    def remove_organization(self):
+        org_name = self.combo_org.currentText()
+        if org_name == "Outra - Especificar Abaixo":
+            return
+
+        key = None
+        for k, v in self.superParent.orgs.items():
+            if v == org_name:
+                key = k
+                break
+        if key:
+            del self.superParent.orgs[key]
+
+        with open(os.path.join(PLUGIN_ROOT, "resourcesFolder", "CodeLists", "SNIMar_ORGS.json"), "w", encoding="utf-8") as f:
+            json.dump(self.superParent.orgs, f)
+
+        self.populate_organizations()
+
 
     def populate_organizations(self):
         self.orgs = {}

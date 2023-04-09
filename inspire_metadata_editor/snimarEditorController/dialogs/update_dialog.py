@@ -31,9 +31,9 @@ import datetime
 from qgis.PyQt import QtGui as qgui
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import QDialog
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import update_progress_bar
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import service
-from EditorMetadadosMarswInforbiomares import CONSTANTS
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import update_progress_bar
+from inspire_metadata_editor.snimarProfileModel import service
+from inspire_metadata_editor.constants import SNIMAR_THESAURUS_DIR
 
 
 class SNIMarThesaurusUpdateDialog(QDialog, update_progress_bar.Ui_update_dialog):
@@ -58,15 +58,15 @@ class SNIMarThesaurusUpdateDialog(QDialog, update_progress_bar.Ui_update_dialog)
         self.update_progressbar.setValue(100)
 
         filename = ''.join(['snimarThesaurus', self.thesaurus.latest_stable_version, '.json'])
-        with open(os.path.join(CONSTANTS.SNIMAR_THESAURUS_DIR, filename), 'w') as fp:
+        with open(os.path.join(SNIMAR_THESAURUS_DIR, filename), 'w') as fp:
             json.dump(self.thesaurus.stable_data, fp)
 
         filename = ''.join(['snimarThesaurus', '.json'])
-        with open(os.path.join(CONSTANTS.SNIMAR_THESAURUS_DIR, filename), 'w') as fp:
+        with open(os.path.join(SNIMAR_THESAURUS_DIR, filename), 'w') as fp:
             json.dump(self.thesaurus.unstable_data, fp)
 
         filename = ''.join(['snimarThesaurus_meta', '.json'])
-        with open(CONSTANTS.SNIMAR_THESAURUS_META, 'w') as fp:
+        with open(SNIMAR_THESAURUS_META, 'w') as fp:
 
             meta = {
                 'last_download': datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%dT%H:%M'),

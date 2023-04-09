@@ -37,12 +37,12 @@ import platform
 from qgis.PyQt.QtWidgets import QToolTip, QDialog
 from qgis.PyQt.QtGui import QCursor, QFont
 
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import \
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import \
     chooseGeographicExtentOnMapDialog  as mdextent
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import \
     geographicinformationPanel
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import \
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import \
     chooseGeographicExtentFromLayer as ly_extent
 
 

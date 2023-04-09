@@ -33,8 +33,8 @@ from qgis.PyQt.QtCore import QAbstractTableModel, QModelIndex, Qt, QSize, QDate
 from qgis.PyQt.QtWidgets import QLineEdit, QCheckBox, QComboBox, QDateEdit, QSpinBox, QDoubleSpinBox, QHeaderView, QTableView, QLabel, QDateTimeEdit
 from qgis.PyQt.QtGui import QBrush, QColor, QStandardItem
 from qgis._gui import QgsFilterLineEdit
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CustomComboBox
+from inspire_metadata_editor.constants import DATE_FORMAT, ERROR_COLOR
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CustomComboBox
 
 
 def rm_accents(input_str):
@@ -83,7 +83,7 @@ class TableModel(QAbstractTableModel):
             if self.matrix[index.row()][index.column()] is None:
                 return None
             else:
-                return self.matrix[index.row()][index.column()].toString(cons.DATE_FORMAT)
+                return self.matrix[index.row()][index.column()].toString(DATE_FORMAT)
         elif role == Qt.DisplayRole and self.type_mappings[index.column()] == CustomComboBox:
             try:
                 return self.matrix[index.row()][index.column()].term_pt
@@ -106,7 +106,7 @@ class TableModel(QAbstractTableModel):
                 if self.valList[index.row()][0]:
                     return None
                 else:
-                    return QColor(cons.ERROR_COLOR)
+                    return QColor(ERROR_COLOR)
             except IndexError:
                 return None
         elif role == Qt.ToolTipRole:

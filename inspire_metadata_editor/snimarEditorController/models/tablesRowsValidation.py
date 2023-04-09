@@ -29,10 +29,10 @@ from builtins import object
 import traceback
 
 from qgis.PyQt.QtCore import QDateTime
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CodeListItem
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor import constants as cons
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CodeListItem
 
 
 class Distribution(object):

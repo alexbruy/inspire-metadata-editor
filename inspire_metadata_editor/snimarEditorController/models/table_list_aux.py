@@ -32,15 +32,15 @@ from qgis.gui import QgsFilterLineEdit
 from qgis.PyQt.QtCore import QDateTime, QObject, QEvent
 from qgis.PyQt.QtWidgets import QLineEdit, QComboBox, QDoubleSpinBox, QAbstractItemView, QPushButton, QSpinBox, QDialog, QHeaderView, QCheckBox, QListView, QPlainTextEdit, QTableView, QDateTimeEdit, QDateEdit
 
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.listModel import ListModel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.tableModel import TableModel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.delegates import DoubleSpinBoxDelegate, SpinBoxDelegate, ComboBoxDelegate, \
+from inspire_metadata_editor.snimarEditorController.models.listModel import ListModel
+from inspire_metadata_editor.snimarEditorController.models.tableModel import TableModel
+from inspire_metadata_editor.snimarEditorController.models.delegates import DoubleSpinBoxDelegate, SpinBoxDelegate, ComboBoxDelegate, \
     DateEditDelegate, CustomComboBoxDelegate, QDateTimeEditDelegate, QgsFilterLineEditDelegate
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.customComboBoxModel import CustomComboBox, CustomComboBoxModel
+from inspire_metadata_editor.constants import DATE_TIME_FORMAT, ERROR_COLOR
+from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel import CustomComboBox, CustomComboBoxModel
 
 
-def addToListView(list, box, format_Date=cons.DATE_TIME_FORMAT, raw=False, combo=False):
+def addToListView(list, box, format_Date=DATE_TIME_FORMAT, raw=False, combo=False):
     if raw and combo:
         list.model().addNewRow(box.itemData(box.currentIndex()))
     elif type(box) == QDateEdit:
@@ -61,7 +61,7 @@ def removeSelectedFromList(list, combo=None):
         list.selectionModel().reset()  # to clear the selected row
 
 
-def addToTableView(table, dataSources, mandatorysources, date_format=cons.DATE_TIME_FORMAT):
+def addToTableView(table, dataSources, mandatorysources, date_format=DATE_TIME_FORMAT):
     to_add_line = []
     i = 0
     for box in dataSources:
@@ -83,7 +83,7 @@ def addToTableView(table, dataSources, mandatorysources, date_format=cons.DATE_T
     table.scrollToBottom()
 
 
-def getText(box, format_date=cons.DATE_TIME_FORMAT):
+def getText(box, format_date=DATE_TIME_FORMAT):
     ret_qString = None
     if type(box) == QLineEdit or type(box) == QgsFilterLineEdit:
         ret_qString = box.text().strip()
@@ -106,7 +106,7 @@ def getText(box, format_date=cons.DATE_TIME_FORMAT):
 
 def setupListView(listView, elementType, parent, comboList=[], fraction_flag=False,
                   double_precision=[999999999, -999999999, 7], validationfunction=lambda x: [True, None],
-                  date_format=cons.DATE_TIME_FORMAT, NoParent=False):
+                  date_format=DATE_TIME_FORMAT, NoParent=False):
     if not NoParent:
         listViewModel = ListModel(parent, elementType, listView.objectName(), fraction_flag, listView,
                                   validationfunction=validationfunction)
@@ -157,7 +157,7 @@ def setupListView(listView, elementType, parent, comboList=[], fraction_flag=Fal
 
 def setupTableView(parent, tableView, header, columnsTypes, addSources, comboList=None, double_precision=[999999999, -999999999, 7],
                    validationfunction=lambda x: [True, None], mandatorysources=[],
-                   date_format=cons.DATE_TIME_FORMAT,
+                   date_format=DATE_TIME_FORMAT,
                    model_data=None):
     comboIter = 0
 
@@ -377,11 +377,11 @@ def checkMandatoryDate(field, fieldlabel, toolTipmsg):
 
 
 def setLabelRed(text):
-    return '<font color=\'' + cons.ERROR_COLOR + '\'>' + unsetLabelRed(text) + "</font>"
+    return '<font color=\'' + ERROR_COLOR + '\'>' + unsetLabelRed(text) + "</font>"
 
 
 def unsetLabelRed(text):
-    return text.replace('<font color=\'' + cons.ERROR_COLOR + '\'>', '').replace("</font>", '')
+    return text.replace('<font color=\'' + ERROR_COLOR + '\'>', '').replace("</font>", '')
 
 
 def unsetupMandatoryField(father, field, fieldlabel):

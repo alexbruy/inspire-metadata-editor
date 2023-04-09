@@ -38,13 +38,13 @@ from qgis.PyQt.QtCore import Qt, QUrl
 from qgis.PyQt.QtGui import QPalette, QFont, QCursor
 from qgis.PyQt.QtWidgets import QMessageBox, QToolTip, QDateTimeEdit, QDateEdit, QWidget
 from qgis._gui import QgsFilterLineEdit
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import contactInlinePanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares.snimarEditorController.dialogs import contacts_dialog
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import listRowsValidation as lval
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import contactInlinePanel
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor.snimarEditorController.dialogs import contacts_dialog
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from inspire_metadata_editor.snimarEditorController.models import listRowsValidation as lval
 
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
 
 from inspire_metadata_editor import resources
 

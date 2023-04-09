@@ -33,7 +33,7 @@ from qgis.PyQt import QtGui as qgui
 from qgis.PyQt.QtWidgets import QItemDelegate, QPushButton
 
 from qgis._gui import QgsFilterLineEdit
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
+from inspire_metadata_editor.constants import DATE_TIME_FORMAT
 from .customComboBoxModel import CustomComboBoxModel
 
 
@@ -203,7 +203,7 @@ class QDateTimeEditDelegate(QItemDelegate):
         return self.editor
 
     def setEditorData(self, editor, index):
-        date = QDateTime.fromString(index.data(), cons.DATE_TIME_FORMAT)
+        date = QDateTime.fromString(index.data(), DATE_TIME_FORMAT)
         editor.setDateTime(date)
 
     def setModelData(self, editor, model, index):

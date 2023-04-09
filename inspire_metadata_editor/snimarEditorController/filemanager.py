@@ -28,8 +28,7 @@ from __future__ import print_function
 import os
 import json
 import datetime
-from EditorMetadadosMarswInforbiomares import CONSTANTS
-from EditorMetadadosMarswInforbiomares.CONSTANTS import FILELIST_STORE
+from inspire_metadata_editor.constants import FILELIST_STORE
 
 
 class FileManager(dict):

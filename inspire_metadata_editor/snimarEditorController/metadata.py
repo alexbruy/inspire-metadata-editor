@@ -34,14 +34,14 @@ import uuid
 from qgis.PyQt.QtCore import Qt, QPoint
 from qgis.PyQt.QtGui import QIcon, QCursor
 from qgis.PyQt.QtWidgets import QToolTip, QDateTimeEdit, QDateEdit, QWidget
-from EditorMetadadosMarswInforbiomares.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import metadataPanel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import table_list_aux as tla
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
-from EditorMetadadosMarswInforbiomares.snimarEditorController import contactWidget
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models.table_list_aux import unsetLabelRed
-from EditorMetadadosMarswInforbiomares.snimarEditorController.models import customComboBoxModel as customCombo
-from  EditorMetadadosMarswInforbiomares.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
+from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import metadataPanel
+from inspire_metadata_editor.snimarEditorController.models import table_list_aux as tla
+from inspire_metadata_editor import constants as cons
+from inspire_metadata_editor.snimarEditorController import contactWidget
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor.snimarEditorController.models.table_list_aux import unsetLabelRed
+from inspire_metadata_editor.snimarEditorController.models import customComboBoxModel as customCombo
+from  inspire_metadata_editor.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
 from inspire_metadata_editor import resources
 
 class MetadataWidget(QWidget, metadataPanel.Ui_metadata):

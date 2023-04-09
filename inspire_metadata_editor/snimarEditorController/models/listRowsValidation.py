@@ -27,7 +27,7 @@
 from builtins import str
 from builtins import object
 import re
-from EditorMetadadosMarswInforbiomares.snimarProfileModel import snimarProfileModel
+from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
 
 
 class Identification(object):

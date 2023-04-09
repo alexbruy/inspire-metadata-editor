@@ -3,7 +3,7 @@ from builtins import object
 from qgis.PyQt.QtCore import QDate, QDateTime
 from qgis.PyQt.QtWidgets import QAbstractSpinBox
 
-from EditorMetadadosMarswInforbiomares import CONSTANTS as cons
+from inspire_metadata_editor import constants as cons
 
 NULLDATE = QDate.fromString('1800-01-01', cons.DATE_FORMAT)
 NULLDATETIME = QDateTime.fromString('1800-01-01 00:00:00', cons.DATE_TIME_FORMAT)
