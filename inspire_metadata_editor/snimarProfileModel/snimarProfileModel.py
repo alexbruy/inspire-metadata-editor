@@ -910,7 +910,7 @@ def export_xml(md):
     env.finalize = silent_none
     template = env.get_template('md_metadata.xml')
     md_dict = md.__dict__
-    md_dict['editor_version'] = EditorMetadadosMarswInforbiomares.__version__
+    #md_dict['editor_version'] = EditorMetadadosMarswInforbiomares.__version__
     md_dict['editor_date'] = datetime.datetime.now()
     return template.render(md_dict)
 

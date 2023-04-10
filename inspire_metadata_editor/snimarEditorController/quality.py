@@ -67,7 +67,7 @@ class QualityWidget(QWidget, qualityPanel.Ui_quality):
                 customCombo.CustomComboBoxModel(self, [None] + sorted(
                         list(self.combo_items_ci_datetypecode.values()),
                         key=lambda x: x.term_pt)))
-        if scope == CONS.Scopes.CDG or scope == CONS.Scopes.SERIES:
+        if scope == cons.Scopes.CDG or scope == cons.Scopes.SERIES:
 
             tla.setupTableView(self, self.processsteps,
                                [u"Descrição", u"Data", u"Justificação"],
@@ -146,7 +146,7 @@ class QualityWidget(QWidget, qualityPanel.Ui_quality):
         dq.conformanceexplanation = self.conformanceexplanation.text()
         dq.conformancedegree.append(self.conformancedegree.isChecked())
 
-        if self.scope == CONS.Scopes.CDG or self.scope == CONS.Scopes.SERIES:
+        if self.scope == cons.Scopes.CDG or self.scope == cons.Scopes.SERIES:
             dq.lineage = self.statement.toPlainText()
             dq.lineageEN = self.statementEN.toPlainText()
             dq.sources = self.source.model().listElements
@@ -172,7 +172,7 @@ class QualityWidget(QWidget, qualityPanel.Ui_quality):
             self.conformanceexplanation.setText(report['explanation'])
             self.conformancedegree.setChecked(True if report['pass'] == 'true' else False)
 
-            if self.scope == CONS.Scopes.CDG or self.scope == CONS.Scopes.SERIES:
+            if self.scope == cons.Scopes.CDG or self.scope == cons.Scopes.SERIES:
                 self.statement.setPlainText(md.dataquality.lineage)
                 self.statementEN.setPlainText(md.dataquality.lineageEN)
 
@@ -199,14 +199,14 @@ class QualityWidget(QWidget, qualityPanel.Ui_quality):
         Sets the report title, date and datetype to the required values specified
         by the INSPIRE Metadata profile.
         """
-        if self.scope == CONS.Scopes.SERVICES:
-            self.conformancetitle.setText(CONS.INSPIRE_TEXT_SERVICE)
+        if self.scope == cons.Scopes.SERVICES:
+            self.conformancetitle.setText(cons.INSPIRE_TEXT_SERVICE)
             self.conformancedate.set_date(
-                    qcore.QDate.fromString(CONS.INSPIRE_DATE_SERVICE, cons.DATE_FORMAT))
+                    qcore.QDate.fromString(cons.INSPIRE_DATE_SERVICE, cons.DATE_FORMAT))
         else:
-            self.conformancetitle.setText(CONS.INSPIRE_TEXT_DATASET)
+            self.conformancetitle.setText(cons.INSPIRE_TEXT_DATASET)
             self.conformancedate.set_date(
-                    qcore.QDate.fromString(CONS.INSPIRE_DATE_DATASET, cons.DATE_FORMAT))
+                    qcore.QDate.fromString(cons.INSPIRE_DATE_DATASET, cons.DATE_FORMAT))
         self.conformancedatetype.setCurrentIndex(self.conformancedatetype.findText(u'Publicação'))
         self.conformanceexplanation.setText(u'Ver a especificação citada.')
         self.setWindowModified(True)
