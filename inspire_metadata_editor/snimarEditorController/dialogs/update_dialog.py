@@ -33,7 +33,7 @@ from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtWidgets import QDialog
 from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import update_progress_bar
 from inspire_metadata_editor.snimarProfileModel import service
-from inspire_metadata_editor.constants import SNIMAR_THESAURUS_DIR
+from inspire_metadata_editor.constants import SNIMAR_THESAURUS_DIR, SNIMAR_THESAURUS_META
 
 
 class SNIMarThesaurusUpdateDialog(QDialog, update_progress_bar.Ui_update_dialog):
