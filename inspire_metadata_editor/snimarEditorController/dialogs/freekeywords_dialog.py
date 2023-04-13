@@ -37,7 +37,6 @@ from inspire_metadata_editor.snimarEditorController.models.customComboBoxModel i
 from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles import keywordsPanel
 from inspire_metadata_editor.snimarEditorController.models.null_QDateEdit import NullQDateEditWrapper
 
-
 class FreeKeyWordsDialog(QDialog, chooseFreeKeywordDialog.Ui_dialogDate):
     def __init__(self, parent, combos, coord=None):
 
@@ -86,7 +85,7 @@ class FreeKeyWordsDialog(QDialog, chooseFreeKeywordDialog.Ui_dialogDate):
         self.superParent = None
         temp = self.parent()
         while self.superParent is None:
-            if issubclass(type(temp), keywordsPanel.Ui_keywords):
+            if temp.__class__.__name__.endswith("KeywordsWidget"):
                 self.superParent = temp
             else:
                 temp = temp.parent()
