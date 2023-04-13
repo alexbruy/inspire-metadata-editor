@@ -93,7 +93,7 @@ class InspireMetadataEditorPlugin:
             message = QMessageBox()
             message.setModal(True)
             message.setWindowTitle(self.tr('O Editor já se encontra a correr?'))
-            message.setWindowIcon(QIcon(PLUGIN_ROOT, "resourcesFolder", "icons", "main_icon.png"))
+            message.setWindowIcon(QIcon(os.path.join(PLUGIN_ROOT, "resourcesFolder", "icons", "main_icon.png")))
             message.setIcon(QMessageBox.Warning)
             message.setText(self.tr("Verifique,\npor favor, se já existe outra instância do Editor de Metadados aberta.\n"
                             "Só é permitida uma instância para evitar conflitos."))

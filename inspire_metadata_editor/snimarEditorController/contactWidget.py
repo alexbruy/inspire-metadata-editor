@@ -47,6 +47,7 @@ from inspire_metadata_editor.snimarEditorController.models import listRowsValida
 from inspire_metadata_editor.snimarProfileModel import snimarProfileModel
 
 from inspire_metadata_editor import resources
+from inspire_metadata_editor.constants import PLUGIN_ROOT
 
 CONTACTFILE = os.path.join(os.path.join(os.path.abspath(os.path.expanduser('~')), '.snimar'), 'contact_list.json')
 validator = lval.InlineContact()
@@ -100,7 +101,7 @@ class InlineContactWidget(QWidget, contactInlinePanel.Ui_contactWidget):
             info.setIcon(qgui.QIcon(':/resourcesFolder/icons/help_icon.svg'))
             info.setText('')
             info.pressed.connect(self.printHelp)
-        f = open(os.path.join(pluginDirectory('EditorMetadadosMarswInforbiomares'), 'resourcesFolder/stylesheet.qtcss'))
+        f = open(os.path.join(PLUGIN_ROOT, 'resourcesFolder/stylesheet.qtcss'))
         self.sytlesheet = f.read()
         for btn in self.findChildren(qwidgets.QPushButton):
             btn.setStyleSheet(self.sytlesheet)

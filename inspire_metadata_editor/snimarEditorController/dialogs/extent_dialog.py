@@ -44,7 +44,7 @@ from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles im
     geographicinformationPanel
 from inspire_metadata_editor.snimarQtInterfaceView.pyuic4GeneratedSourceFiles.dialogs import \
     chooseGeographicExtentFromLayer as ly_extent
-
+from inspire_metadata_editor.constants import PLUGIN_ROOT
 
 class SelectionTool(gui.QgsMapToolEmitPoint):
     def __init__(self, canvas, parent):
@@ -228,7 +228,7 @@ class ExtentDialog(QDialog, mdextent.Ui_MDExtentDialogBase):
         self.resourcebox.setChecked(True)
         self.pan()
 
-        plugin_path = utils.pluginDirectory('EditorMetadadosMarswInforbiomares')
+        plugin_path = PLUGIN_ROOT
 
         # Load Vector
         layerpath = os.path.join(plugin_path, "resourcesFolder/World.shp")
