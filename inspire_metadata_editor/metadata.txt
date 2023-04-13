@@ -1,7 +1,7 @@
 [general]
 name=INSPIRE metadata editor
 description=Plugin para a criação e edição de metadados segundo o perfil SNIMar
-about=Este editor de metadados é o "porting" para a versão 3 do QGIS do editor de Metadados desenvolvido no âmbito do Projecto SNIMar (http://editor.snimar.pt/) com o objectivo de ser a ferramenta destinada à criação dos metadados em conformidade com o Perfil de Metadados SNIMar. O trabalho de migração do código para QGIS 3 foi realizado no âmbito dos projectos MARSW e INFORBIOMARES.
+about=Este editor de metadados é o "porting" para a versão 3 do QGIS do editor de Metadados desenvolvido no âmbito do Projecto SNIMar (http://editor.snimar.pt/) com o objectivo de ser a ferramenta destinada à criação dos metadados em conformidade com o Perfil de Metadados SNIMar. O trabalho de migração do código para QGIS 3 foi realizado pela NaturalGIS (https://www.naturalgis.pt/) no âmbito dos projectos MARSW e INFORBIOMARES. Sucessivamente foi iniciado um trabalho de refactoring do código. Developers: Main Developers: Pedro Dias, Eduardo Castanho, Alexander Bruy; Contributors: Joana Teixeira, Alexandre Neto
 category=Plugins
 version=0.1.0
 qgisMinimumVersion=3.22
