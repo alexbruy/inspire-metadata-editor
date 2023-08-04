@@ -270,6 +270,8 @@ class EditorWindow(BASE, WIDGET):
 
     def open_metadata_xml_file(self, name=None):
         """Slot to create a new tab using the data retrieved from a XML file."""
+        if not name:
+            name = [None, None]
         # Get the filename
         if name is None:
             name = [None, None]
