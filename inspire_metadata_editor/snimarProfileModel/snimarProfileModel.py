@@ -906,7 +906,7 @@ def export_xml(md):
         return None
 
     loader = FileSystemLoader(TEMPLATES_DIR)
-    env = Environment(loader=loader, autoescape=True, extensions=['jinja2.ext.autoescape'])
+    env = Environment(loader=loader, autoescape=True)
     env.finalize = silent_none
     template = env.get_template('md_metadata.xml')
     md_dict = md.__dict__
